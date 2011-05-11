@@ -1,0 +1,13 @@
+rubber-test/*.aux
+rubber-test/*.log
+rubber-test/*.pdf
+rubber-test/figures/schema:*.pdf
+
+build
+dist
+omnigraffle_export.egg-info
+
+/build
+/dist
+
+*.pyc
