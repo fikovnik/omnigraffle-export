@@ -14,7 +14,8 @@ class OmniGraffleExportTest(unittest.TestCase):
         self.files_to_remove = []
 
     def setUp(self):
-        path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'test_data','basic','test.graffle')
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            'test_data', 'basic', 'test.graffle')
         self.schema = omnigraffle_export.OmniGraffleSchema(path)
         self.assertTrue(self.schema != None)
 
