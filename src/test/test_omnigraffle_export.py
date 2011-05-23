@@ -5,7 +5,7 @@ import shutil
 import time
 import logging
 
-import omnigraffleexport
+import omnigraffle_export
 
 class OmniGraffleExportTest(unittest.TestCase):
 
@@ -15,7 +15,7 @@ class OmniGraffleExportTest(unittest.TestCase):
 
     def setUp(self):
         path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'test_data','basic','test.graffle')
-        self.schema = omnigraffleexport.OmniGraffleSchema(path)
+        self.schema = omnigraffle_export.OmniGraffleSchema(path)
         self.assertTrue(self.schema != None)
 
         logging.basicConfig(level=logging.DEBUG)
@@ -34,10 +34,10 @@ class OmniGraffleExportTest(unittest.TestCase):
         tmpfile = self.genTempFileName('pdf')
 
         self.assertTrue(self.schema.export('Canvas 1', tmpfile))
-        chksum = omnigraffleexport.checksum(tmpfile)
+        chksum = omnigraffle_export.checksum(tmpfile)
 
         self.assertFalse(self.schema.export('Canvas 1', tmpfile))
-        self.assertEqual(chksum, omnigraffleexport.checksum(tmpfile))
+        self.assertEqual(chksum, omnigraffle_export.checksum(tmpfile))
 
         self.files_to_remove.append(tmpfile)
 
@@ -45,11 +45,11 @@ class OmniGraffleExportTest(unittest.TestCase):
         tmpfile = self.genTempFileName('pdf')
 
         self.assertTrue(self.schema.export('Canvas 1', tmpfile))
-        chksum = omnigraffleexport.checksum(tmpfile)
+        chksum = omnigraffle_export.checksum(tmpfile)
         time.sleep(2)
 
         self.assertTrue(self.schema.export('Canvas 1', tmpfile, force=True))
-        self.assertNotEqual(chksum, omnigraffleexport.checksum(tmpfile))
+        self.assertNotEqual(chksum, omnigraffle_export.checksum(tmpfile))
 
         self.files_to_remove.append(tmpfile)
 

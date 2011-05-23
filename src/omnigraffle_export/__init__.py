@@ -7,8 +7,8 @@ import logging
 import tempfile
 import hashlib
 
-import Foundation
-import Quartz
+from Foundation import NSURL, NSMutableDictionary
+from Quartz import PDFKit
 
 from appscript import *
 
@@ -90,11 +90,11 @@ class OmniGraffleSchema(object):
 
         if format == 'pdf':
             # save the checksum
-            url = Foundation.NSURL.fileURLWithPath_(file)
-            pdfdoc = Quartz.PDFDocument.alloc().initWithURL_(url)
-            attrs = Foundation.NSMutableDictionary.alloc().initWithDictionary_(pdfdoc.documentAttributes())
+            url = NSURL.fileURLWithPath_(file)
+            pdfdoc = PDFKit.PDFDocument.alloc().initWithURL_(url)
+            attrs = NSMutableDictionary.alloc().initWithDictionary_(pdfdoc.documentAttributes())
 
-            attrs[Quartz.PDFDocumentSubjectAttribute] = \
+            attrs[PDFKit.PDFDocumentSubjectAttribute] = \
                 '%s%s' % (OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE, chksum)
 
             pdfdoc.setDocumentAttributes_(attrs)
@@ -139,10 +139,10 @@ def checksum(filepath):
 def checksum_pdf(filepath):
     assert os.path.isfile(filepath), '%s is not a file' % filepath
 
-    url = Foundation.NSURL.fileURLWithPath_(filepath)
-    pdfdoc = Quartz.PDFDocument.alloc().initWithURL_(url)
+    url = NSURL.fileURLWithPath_(filepath)
+    pdfdoc = PDFKit.PDFDocument.alloc().initWithURL_(url)
     assert pdfdoc != None
-    chksum = pdfdoc.documentAttributes()[Quartz.PDFDocumentSubjectAttribute]
+    chksum = pdfdoc.documentAttributes()[PDFKit.PDFDocumentSubjectAttribute]
 
     if not chksum.startswith(OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE):
         return None

@@ -3,7 +3,7 @@
 import sys
 import os
 import re
-import omnigraffleexport
+import omnigraffle_export
 
 arg_re_ = re.compile('(.*):(.*)\.(.*)')
 
@@ -22,7 +22,7 @@ def main():
     source = os.path.abspath(source + '.graffle')
     target = '%s/%s:%s.%s' % (os.path.dirname(source), os.path.basename(source).replace('.graffle',''), canvas, format)
     
-    schema = omnigraffleexport.OmniGraffleSchema(source)
+    schema = omnigraffle_export.OmniGraffleSchema(source)
     schema.export(canvas, target, format)
     sys.exit(0)
 
