@@ -31,8 +31,8 @@ setup (
     ],
     entry_points = {
         'console_scripts': [
-            'omnigraffle-export = omnigraffleexport:main',
-            'omnigraffle-export-rubber = omnigraffleexport.rubber:main',
+            'omnigraffle-export = omnigraffle_export:main',
+            'omnigraffle-export-rubber = omnigraffle_export.rubber:main',
         ],
     },
     package_data = {
