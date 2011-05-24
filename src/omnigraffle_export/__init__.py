@@ -12,13 +12,6 @@ from Quartz import PDFKit
 
 from appscript import *
 
-# TODO: make it more robust to check whether og is running each time there is an action
-# TODO: if omnigraffle is not running at the beginning, close it in the end
-# TODO: github
-# TODO: change all my documents and test
-# TODO: put to a forums
-# TODO: write a blog post
-
 class OmniGraffleSchema(object):
     """ A class that encapsulates an OmniGraffle schema file"""
 
