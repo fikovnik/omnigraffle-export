@@ -151,7 +151,7 @@ def main():
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option('-f', 
-                      help='format (one of: pdf, pnf, eps), defualt pdf', 
+                      help='format (one of: pdf, png, eps), defualt pdf', 
                       metavar='FMT', dest='format', default='pdf')
     parser.add_option('--force', action='store_true', help='force the export', 
                       dest='force')
