@@ -33,7 +33,8 @@ fi
 
 echo "Modifying $rules_ini"
 cat <<EOF >> $rules_ini
-
+;-- added by setup-rubber.sh script part of the omnigraffle-export
+;-- https://github.com/fikovnik/omnigraffle-export
 [convert-omnigraffle]
 target = (.*):(.*)\.(eps|pdf)
 source = \1.graffle
