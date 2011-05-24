@@ -15,6 +15,7 @@ setup (
     install_requires = ['appscript'],
     author = "Filip Krikava",
     author_email = "krikava@gmail.com",
+    description = "A command line utility that exports omnigraffle canvases files into various formats with a rubber support.",
     long_description = read("README.md"),
     license = "http://www.opensource.org/licenses/mit-license.php",
     keywords = "omnigraffle export",
