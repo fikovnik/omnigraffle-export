@@ -25,7 +25,7 @@ Or using the PIP:
 	
 	Options:
 	  -h, --help  show this help message and exit
-	  -f FMT      format (one of: pdf, png, eps), defualt pdf
+	  -f FMT      format (one of: pdf, png, svg, eps), default pdf
 	  --force     force the export
 	  -v          verbose
 	  -c NAME     canvas name (if not given -t must point to a directory)
