@@ -78,7 +78,7 @@ class OmniGraffleSchema(object):
                          (canvasname, self.schemafile))
             return False
 
-        self.og.set(win.canvas, to=c)
+        self.og.set(win.canvas, to=canvas)
 
         self.doc.save(as_=OmniGraffleSchema.EXPORT_FORMATS[format], in_=file)
 
