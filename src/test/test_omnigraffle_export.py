@@ -69,10 +69,10 @@ class OmniGraffleExportTest(unittest.TestCase):
 
         self.files_to_remove.append(tmpfile)
 
-    def textExportAll(self):
+    def testExportAll(self):
         tmpdir = tempfile.mkdtemp()
 
-        self.schema.exportAll(tmpdir)
+        self.schema.export_all(tmpdir)
         self.assertTrue(os.path.exists(os.path.join(tmpdir, 'Canvas 1.pdf')))
         self.assertTrue(os.path.exists(os.path.join(tmpdir, 'Canvas 2.pdf')))
 
