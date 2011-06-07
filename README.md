@@ -47,7 +47,9 @@ If the target file exists it tries to determine whether the canvas has been chan
 * Export canvas name _FullModel_ into a _my_new_model.pdf_ PDF file:
     
   `omnigraffle-export -c FullModel -f pdf schemas.graffle my_new_model`
-  or 
+
+  or
+
   `omnigraffle-export -c FullModel schemas.graffle my_new_model.pdf`
     
   _Note: that the '.pdf' suffix will be automatically added in the first case._ 
