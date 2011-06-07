@@ -19,7 +19,8 @@ class OmniGraffleSchema(object):
     EXPORT_FORMATS = {
         "eps": "EPS Format",
         "pdf": "Apple PDF pasteboard type",
-        "png": "PNG"
+        "png": "PNG",
+        "svg": None, # let the application guess what type to save as
     }
 
     # attribute header in PDF document that contains the checksum
@@ -78,9 +79,13 @@ class OmniGraffleSchema(object):
                          (canvasname, self.schemafile))
             return False
 
-        self.og.set(win.canvas, to=c)
+        self.og.set(win.canvas, to=canvas)
 
-        self.doc.save(as_=OmniGraffleSchema.EXPORT_FORMATS[format], in_=file)
+        export_format = OmniGraffleSchema.EXPORT_FORMATS[format]
+        if (export_format == None):
+            self.doc.save(in_=file)
+        else:
+            self.doc.save(as_=export_format, in_=file)
 
         logging.debug('Exported %s into %s as %s' % (canvasname, file, format))
 
@@ -98,17 +103,17 @@ class OmniGraffleSchema(object):
 
         return True
 
-    def export_all(self, targetdir, format='pdf', force=False,
-                  namemap=lambda c: c + '.pdf'):
+    def export_all(self, targetdir, fmt='pdf', force=False,
+                  namemap=lambda c, f: "%s.%s" % (c, f)):
         """
         Exports all canvases
         """
 
         for c in self.get_canvas_list():
-            targetfile = os.path.join(os.path.abspath(targetdir), namemap(c))
+            targetfile = os.path.join(os.path.abspath(targetdir), namemap(c, fmt))
             logging.debug('Exporting %s into %s as %s' % 
-                          (c, targetfile, format))
-            self.export(c, targetfile, format, force)
+                          (c, targetfile, fmt))
+            self.export(c, targetfile, fmt, force)
 
     def compute_canvas_checksum(self, canvasname):
         tmpfile = tempfile.mkstemp(suffix='.png')[1]
@@ -151,7 +156,7 @@ def main():
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option('-f', 
-                      help='format (one of: pdf, png, eps), defualt pdf', 
+                      help='format (one of: pdf, png, svg, eps), default pdf',
                       metavar='FMT', dest='format', default='pdf')
     parser.add_option('--force', action='store_true', help='force the export', 
                       dest='force')
@@ -183,7 +188,7 @@ def main():
         schema.export(options.canvas, target, options.format,
                       force=options.force)
     else:
-        schema.export_all(target, options.format, force=options.force)
+        schema.export_all(target, fmt=options.format, force=options.force)
 
 if __name__ == '__main__':
     main()
