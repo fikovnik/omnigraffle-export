@@ -66,7 +66,7 @@ Rubber is a program whose purpose is to handle all tasks related to the compilat
 
 ### Setup
 
-Rubber uses `rules.ini` file to configure conversion options. In order to allow to use OmniGraffle Export, following needs to be added to the rules.ini (with the appropriate path alteration):
+Rubber uses `rules.ini` file to configure conversion options. In order to allow to use OmniGraffle Export, following needs to be added to the `rules.ini` (with the appropriate path alteration):
 
 	[convert-omnigraffle]
 	target = (.*):(.*)\.(eps|pdf)
