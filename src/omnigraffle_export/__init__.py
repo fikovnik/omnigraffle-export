@@ -20,7 +20,7 @@ class OmniGraffleSchema(object):
         "eps": "EPS Format",
         "pdf": "Apple PDF pasteboard type",
         "png": "PNG",
-        "svg": None, # let the application guess what type to save as
+        "svg": "Scalable Vector Graphics XML File Type",
     }
 
     # attribute header in PDF document that contains the checksum
