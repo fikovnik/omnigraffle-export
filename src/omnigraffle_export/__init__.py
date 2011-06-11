@@ -26,11 +26,12 @@ class OmniGraffleSchema(object):
     # attribute header in PDF document that contains the checksum
     PDF_CHECKSUM_ATTRIBUTE = 'OmnigraffleExportChecksum: '
 
-    def __init__(self, schemafile):
+    def __init__(self, options, schemafile):
         schemafile = os.path.abspath(schemafile)  
         if not os.path.isfile(schemafile):
             raise ValueError('File: %s does not exists' % schemafile)
 
+        self.options = options
         self.schemafile = os.path.abspath(schemafile)
         self.og = app('OmniGraffle Professional 5.app')
         self.og.activate()
@@ -87,8 +88,8 @@ class OmniGraffleSchema(object):
         else:
             self.doc.save(as_=export_format, in_=file)
 
-        if not is_checksum:
-            logging.info("%s" % file)
+        if not is_checksum and self.options.verbose:
+            print "%s" % file
 
         logging.debug("Exported `%s' into `%s' as %s" % (canvasname, file, format))
 
@@ -188,7 +189,7 @@ def main():
     else:
         logging.basicConfig(level=logging.INFO, format='%(message)s')
 
-    schema = OmniGraffleSchema(source)
+    schema = OmniGraffleSchema(options, source)
 
     if options.canvas:
         schema.export(options.canvas, target, options.format,
