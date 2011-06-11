@@ -46,7 +46,7 @@ class OmniGraffleSchema(object):
 
         return [c.name() for c in self.doc.canvases()]
 
-    def export(self, canvasname, file, format='pdf', force=False):
+    def export(self, canvasname, file, format='pdf', force=False, is_checksum=False):
         """
         Exports one canvas named {@code canvasname}
         """
@@ -87,7 +87,10 @@ class OmniGraffleSchema(object):
         else:
             self.doc.save(as_=export_format, in_=file)
 
-        logging.debug('Exported %s into %s as %s' % (canvasname, file, format))
+        if not is_checksum:
+            logging.info("%s" % file)
+
+        logging.debug("Exported `%s' into `%s' as %s" % (canvasname, file, format))
 
         if format == 'pdf':
             # save the checksum
@@ -111,7 +114,7 @@ class OmniGraffleSchema(object):
 
         for c in self.get_canvas_list():
             targetfile = os.path.join(os.path.abspath(targetdir), namemap(c, fmt))
-            logging.debug('Exporting %s into %s as %s' % 
+            logging.debug("Exporting `%s' into `%s' as %s" % 
                           (c, targetfile, fmt))
             self.export(c, targetfile, fmt, force)
 
@@ -119,7 +122,7 @@ class OmniGraffleSchema(object):
         tmpfile = tempfile.mkstemp(suffix='.png')[1]
         os.unlink(tmpfile)
 
-        assert self.export(canvasname, tmpfile, 'png', True)
+        assert self.export(canvasname, tmpfile, 'png', True, True)
 
         try:
             chksum = checksum(tmpfile)
@@ -180,10 +183,10 @@ def main():
         print >> sys.stderr, "Without canvas name, the target (-t) must be a directory"
         sys.exit(1)
 
-    if options.verbose:
+    if options.debug:
         logging.basicConfig(level=logging.DEBUG)
     else:
-        logging.basicConfig(level=logging.INFO)
+        logging.basicConfig(level=logging.INFO, format='%(message)s')
 
     schema = OmniGraffleSchema(source)
 
