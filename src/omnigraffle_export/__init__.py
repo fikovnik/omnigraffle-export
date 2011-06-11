@@ -161,6 +161,9 @@ def main():
     parser.add_option('--force', action='store_true', help='force the export', 
                       dest='force')
     parser.add_option('-v', action='store_true', help='verbose', dest='verbose')
+    parser.add_option('--verbose', action='store_true', help='verbose', dest='verbose')
+    parser.add_option('-d', action='store_true', help='debug', dest='debug')
+    parser.add_option('--debug', action='store_true', help='debug', dest='debug')
     parser.add_option('-c', 
                       help='canvas name (if not given -t must point to a directory)', 
                       metavar='NAME', dest='canvas')
