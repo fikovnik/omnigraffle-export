@@ -9,7 +9,7 @@ def read(fname):
 
 setup (
     name = "omnigraffle-export",
-    version = "1.2",
+    version = "1.3",
     packages = find_packages('src'),
     package_dir = {'':'src'},
     install_requires = ['appscript'],
@@ -37,7 +37,7 @@ setup (
     },
     package_data = {
         '': ['setup-rubber.sh'],
-    },    
+    },
     test_suite = 'test',
     zip_safe = True
 )
