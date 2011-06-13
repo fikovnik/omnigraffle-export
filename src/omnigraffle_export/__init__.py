@@ -26,10 +26,18 @@ class OmniGraffleSchema(object):
     # attribute header in PDF document that contains the checksum
     PDF_CHECKSUM_ATTRIBUTE = 'OmnigraffleExportChecksum: '
 
-    def __init__(self, schemafile):
+    def __init__(self, schemafile, verbose=False):
+        """
+        @param schemafile
+        @param verbose
+        """
+
         schemafile = os.path.abspath(schemafile)  
         if not os.path.isfile(schemafile):
             raise ValueError('File: %s does not exists' % schemafile)
+
+        # options
+        self.verbose = verbose
 
         self.schemafile = os.path.abspath(schemafile)
         self.og = app('OmniGraffle Professional 5.app')
@@ -51,11 +59,12 @@ class OmniGraffleSchema(object):
         Exports one canvas named {@code canvasname}
         """
 
+        # canvas name
         if not canvasname or len(canvasname) == 0:
             raise Exception('canvasname is missing')
         logging.debug('Exporting canvas: %s ' % canvasname) 
 
-        # fix format
+        # format
         if not format or len(format) == 0:
             format = 'pdf'
         else:
@@ -63,14 +72,14 @@ class OmniGraffleSchema(object):
         if format not in OmniGraffleSchema.EXPORT_FORMATS:
             raise Exception('Unknown format: %s' % format)
         logging.debug('Exporting into format: %s ' % format)
-        
+
         filename = os.path.abspath(filename)
-        
-        # fix the suffix
+
+        # suffix
         if filename[filename.rfind('.')+1:].lower() != format:
             filename = '%s.%s' % (filename, format)
         logging.debug('Exporting into: %s ' % filename)
-        
+
         # checksum
         chksum = None
         if os.path.isfile(filename) and not force:
@@ -88,26 +97,13 @@ class OmniGraffleSchema(object):
         elif format == 'pdf':
             chksum = self.compute_canvas_checksum(canvasname)
 
-        win = self.og.windows.first()
-
-        canvas = [c for c in self.doc.canvases() if c.name() == canvasname]
-        if len(canvas) == 1:
-            canvas = canvas[0]
+        if self._export_internal(canvasname, filename, format):
+            if self.verbose:
+                print "%s" % filename
         else:
-            logging.warn('Canvas %s does not exist in %s' % 
-                         (canvasname, self.schemafile))
-            return False
+            print >> sys.stderr, 'Failed to export canvas: %s to %s' % (canvasname, filename)
 
-        self.og.set(win.canvas, to=canvas)
-
-        export_format = OmniGraffleSchema.EXPORT_FORMATS[format]
-        if (export_format == None):
-            self.doc.save(in_=filename)
-        else:
-            self.doc.save(as_=export_format, in_=filename)
-
-        logging.debug('Exported %s into %s as %s' % (canvasname, filename, format))
-
+        # update checksum
         if format == 'pdf':
             # save the checksum
             url = NSURL.fileURLWithPath_(filename)
@@ -130,7 +126,7 @@ class OmniGraffleSchema(object):
 
         for c in self.get_canvas_list():
             targetfile = os.path.join(os.path.abspath(targetdir), namemap(c, fmt))
-            logging.debug('Exporting %s into %s as %s' % 
+            logging.debug("Exporting `%s' into `%s' as %s" % 
                           (c, targetfile, fmt))
             self.export(c, targetfile, fmt, force)
 
@@ -138,7 +134,7 @@ class OmniGraffleSchema(object):
         tmpfile = tempfile.mkstemp(suffix='.png')[1]
         os.unlink(tmpfile)
 
-        assert self.export(canvasname, tmpfile, 'png', True)
+        assert self._export_internal(canvasname, tmpfile, 'png')
 
         try:
             chksum = checksum(tmpfile)
@@ -146,6 +142,26 @@ class OmniGraffleSchema(object):
         finally:
             os.unlink(tmpfile)
 
+    def _export_internal(self, canvasname, filename, format):
+         # find canvas
+        canvas = [c for c in self.doc.canvases() if c.name() == canvasname]
+        if len(canvas) == 1:
+            canvas = canvas[0]
+        else:
+            logging.warn('Canvas %s does not exist in %s' % 
+                         (canvasname, self.schemafile))
+            return False
+
+        # export
+        self.og.windows.first().canvas.set(canvas)
+        export_format = OmniGraffleSchema.EXPORT_FORMATS[format]
+        if (export_format == None):
+            self.doc.save(in_=filename)
+        else:
+            self.doc.save(as_=export_format, in_=filename)
+
+        logging.debug("Exported `%s' into `%s' as %s" % (canvasname, file, format))
+        return True
 
 def checksum(filepath):
     assert os.path.isfile(filepath), '%s is not a file' % filepath
@@ -171,13 +187,13 @@ def checksum_pdf(filepath):
         return chksum[len(OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE):]
 
 def export(source, target, options):
-    
+
     # logging
-    if options.verbose:
+    if options.debug:
         logging.basicConfig(level=logging.DEBUG)
     else:
-        logging.basicConfig(level=logging.INFO)
-                        
+        logging.basicConfig(level=logging.INFO, format='%(message)s')
+
     # mode
     export_all = os.path.isdir(target)
 
@@ -188,11 +204,11 @@ def export(source, target, options):
         if not export_all:
             canvasname = os.path.basename(target)
             canvasname = canvasname[:canvasname.rfind('.')]
-       
+
         if not canvasname or len(canvasname) == 0:
             print >> sys.stderr, "Without canvas name, the target (-t) must be a directory"
             sys.exit(1)
-        
+
     # determine the format
     format = options.format
     if not format:
@@ -205,7 +221,7 @@ def export(source, target, options):
         print >> sys.stderr, "File: %s could not be opened for reading" % source
         sys.exit(1)
 
-    schema = OmniGraffleSchema(source)
+    schema = OmniGraffleSchema(source, verbose=options.verbose)
 
     if export_all:
         schema.export_all(target, fmt=format, force=options.force)
@@ -213,7 +229,7 @@ def export(source, target, options):
         schema.export(canvasname, target, format, options.force)
 
 def main():
-    usage = "usage: %prog [options] <source> <target>"
+    usage = "Usage: %prog [options] <source> <target>"
     parser = optparse.OptionParser(usage=usage)
 
     parser.add_option('-c', 
@@ -225,14 +241,17 @@ def main():
     parser.add_option('--force', action='store_true', help='force the export', 
                       dest='force')
     parser.add_option('-v', action='store_true', help='verbose', dest='verbose')
+    parser.add_option('--verbose', action='store_true', help='verbose', dest='verbose')
+    parser.add_option('-d', action='store_true', help='debug', dest='debug')
+    parser.add_option('--debug', action='store_true', help='debug', dest='debug')
 
-    options, args = parser.parse_args()
+    (options, args) = parser.parse_args()
 
     if len(args) != 2:
         parser.print_help()
         sys.exit(1)
 
-    source, target = args
+    (source, target) = args
 
     export(source, target, options)
 
