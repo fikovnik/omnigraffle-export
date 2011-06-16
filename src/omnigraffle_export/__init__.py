@@ -119,7 +119,7 @@ class OmniGraffleSchema(object):
         return True
 
     def export_all(self, targetdir, fmt='pdf', force=False,
-                  namemap=lambda c, f: "%s.%s" % (c, f)):
+                  namemap=lambda c, f: '%s.%s' % (c, f) if f else c):
         """
         Exports all canvases
         """
@@ -194,14 +194,17 @@ def export(source, target, options):
     else:
         logging.basicConfig(level=logging.INFO, format='%(message)s')
 
+    # target
+    target = os.path.abspath(target)
+
     # mode
     export_all = os.path.isdir(target)
 
     # determine the canvas
     canvasname = options.canvasname
-    if not canvasname:
+    if not export_all:
         # guess from filename
-        if not export_all:
+        if not canvasname:
             canvasname = os.path.basename(target)
             canvasname = canvasname[:canvasname.rfind('.')]
 
@@ -211,9 +214,9 @@ def export(source, target, options):
 
     # determine the format
     format = options.format
-    if not format:
+    if not export_all:
         # guess from the suffix
-        if not export_all:
+        if not format:
             format = target[target.rfind('.')+1:]
 
     # check source
@@ -224,7 +227,7 @@ def export(source, target, options):
     schema = OmniGraffleSchema(source, verbose=options.verbose)
 
     if export_all:
-        schema.export_all(target, fmt=format, force=options.force)
+        schema.export_all(target, format, force=options.force)
     else:
         schema.export(canvasname, target, format, options.force)
 
