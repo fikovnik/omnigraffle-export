@@ -9,7 +9,7 @@ def read(fname):
 
 setup (
     name = "omnigraffle-export",
-    version = "1.3",
+    version = "1.3.1",
     packages = find_packages('src'),
     package_dir = {'':'src'},
     install_requires = ['appscript'],
