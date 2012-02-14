@@ -9,13 +9,13 @@ def read(fname):
 
 setup (
     name = "omnigraffle-export",
-    version = "1.4.1",
+    version = "1.4.2",
     packages = find_packages(exclude='tests'),
     install_requires = ['appscript'],
     author = "Filip Krikava",
     author_email = "krikava@gmail.com",
     description = "A command line utility that exports omnigraffle canvases files into various formats.",
-    long_description = read("README.md"),
+    long_description = read("README.rst"),
     license = "http://www.opensource.org/licenses/mit-license.php",
     keywords = "omnigraffle export",
     url = "https://github.com/fikovnik/omnigraffle-export",
