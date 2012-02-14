@@ -9,9 +9,8 @@ def read(fname):
 
 setup (
     name = "omnigraffle-export",
-    version = "1.3.1",
-    packages = find_packages('src'),
-    package_dir = {'':'src'},
+    version = "1.4.0",
+    packages = find_packages(exclude='tests'),
     install_requires = ['appscript'],
     author = "Filip Krikava",
     author_email = "krikava@gmail.com",
@@ -34,6 +33,6 @@ setup (
             'omnigraffle-export = omnigraffle_export:main',
         ],
     },
-    test_suite = 'test',
-    zip_safe = True
+    test_suite = 'tests',
+    zip_safe = True,
 )
