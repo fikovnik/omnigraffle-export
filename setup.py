@@ -32,19 +32,8 @@ setup (
     entry_points = {
         'console_scripts': [
             'omnigraffle-export = omnigraffle_export:main',
-            'omnigraffle-export-rubber = omnigraffle_export.rubber:main',
         ],
-    },
-    package_data = {
-        '': ['setup-rubber.sh'],
     },
     test_suite = 'test',
     zip_safe = True
 )
-
-print """
-******************
-* RUBBER support *
-******************
-If you want to setup rubber support run the setup-rubber.sh from: %s
-""" % resource_filename(__name__, 'setup-rubber.sh')
