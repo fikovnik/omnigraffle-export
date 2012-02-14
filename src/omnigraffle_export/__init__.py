@@ -47,13 +47,6 @@ class OmniGraffleSchema(object):
 
         logging.debug('Opened OmniGraffle file: ' + self.schemafile)
 
-    def close_document(self):
-        """
-        Close the currently open document, if there is one.
-        """
-        if self.doc:
-            self.doc.close()
-
     def get_canvas_list(self):
         """
         Returns a list of names of all the canvases in the document
@@ -237,8 +230,6 @@ def export(source, target, options):
         schema.export_all(target, format, force=options.force)
     else:
         schema.export(canvasname, target, format, options.force)
-
-    schema.close_document()
 
 def main():
     usage = "Usage: %prog [options] <source> <target>"
