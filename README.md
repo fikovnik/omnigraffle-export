@@ -1,7 +1,6 @@
 # OmniGraffle Export tool
 
 A command line tool that allows to export one or more canvases from [OmniGraffle](http://www.omnigroup.com/products/omnigraffle/) into various formats using [OmniGraffle AppleScript interface](http://www.omnigroup.com/mailman/archive/omnigraffle-users/2008/004785.html).
-It is compatible with [rubber](https://launchpad.net/rubber) and can be configured to automatically export figures out of .graffle file.
 
 ## Installation
 
@@ -58,34 +57,40 @@ If the target file exists it tries to determine whether the canvas has been chan
 
   `omnigraffle-export -f eps schemas.graffle figures`
 
-## LaTeX support via rubber
+## LaTeX Support Example
 
-### Rubber
+One of the main motivation for this package was to be able to quickly export OmniGraffle canvases and use them in LaTeX.
+One of the possible setup is following:
 
-Rubber is a program whose purpose is to handle all tasks related to the compilation of LaTeX documents. This includes compiling the document itself, of course, enough times so that all references are defined, and running BibTeX to manage bibliographic references. Automatic execution of dvips to produce PostScript documents is also included, as well as usage of pdfLaTeX to produce PDF documents.
+* Every time a figure is included add some instruction so it can be later exported from OmniGraffle file. For example a comment like `% omnigraffle <path/to/.graffle/file> <output>` that would tell the exported to export a canvas `CondorKernel` from `sources/schemas.graffle` into `figures/CondorKernel.pdf` as PDF:
 
-### Setup
+    \begin{figure}
+      \center
+      % omnigraflle: sources/schemas.graffle figures/CondorKernel.pdf
+      \includegraphics[scale=.5]{images/CondorKernel}
+    \end{figure}
 
-Rubber uses `rules.ini` file to configure conversion options. In order to allow to use OmniGraffle Export, following needs to be added to the `rules.ini` (with the appropriate path alteration):
+* An example preprocesor in python using [frabric](http://docs.fabfile.org/en/1.4.0/index.html):
 
-	[convert-omnigraffle]
-	target = (.*):(.*)\.(eps|pdf)
-	source = \1.graffle
-	cost = 0
-	rule = shell
-	command = /opt/local/Library/Frameworks/Python.framework/Versions/2.6/bin/omnigraffle-export-rubber $target
-	message = converting omigraffle $source into $target
+    from fabric.api import *
+    import re
 
-This can be done automatically by executing the `setup-rubber.sh` script as root
+    # latex files to process
+    fnames = ['UCGridRLDecisionModel.tex']
+    omnigraffle_re = re.compile(r'%\s*omnigraflle:\s*([^ ]+)\s+([^ ]+)')
 
-### Usage
+    def _convert(source, target):
+        local('omnigraffle-export %s %s' % (source, target))
 
-Following is an example how to include a canvas named `Canvas1` from file `figures/schema.graffle`:
-
-	\begin{figure}
-	  \centering
-	  \includegraphics[width=\textwidth]{figures/schema:Canvas1.pdf}
-	  \caption{Example of a OmniGraffle figure}
-	\end{figure}
-
-The notation is `<path_to_graffle_file_without_dot_graffle_suffix>:<canvas_name>`
+    @task
+    def schemas():
+        '''
+        Generate all schemas
+        '''
+        
+        for fname in fnames:
+            with open(fname) as f:
+                for l in f:
+                    m = omnigraffle_re.match(l.strip())
+                    if m:
+                        _convert(*m.groups())
