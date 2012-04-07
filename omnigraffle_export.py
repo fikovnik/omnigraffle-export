@@ -34,7 +34,7 @@ class OmniGraffleSchema(object):
 
         schemafile = os.path.abspath(schemafile)
         if not os.path.isfile(schemafile) and \
-                not os.path.isfile(os.path.join(schemafile, "data.plist"):
+                not os.path.isfile(os.path.join(schemafile, "data.plist")):
             raise ValueError('File: %s does not exists' % schemafile)
 
         # options
