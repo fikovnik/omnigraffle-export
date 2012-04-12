@@ -32,8 +32,9 @@ class OmniGraffleSchema(object):
         @param verbose
         """
 
-        schemafile = os.path.abspath(schemafile)  
-        if not os.path.isfile(schemafile):
+        schemafile = os.path.abspath(schemafile)
+        if not os.path.isfile(schemafile) and \
+                not os.path.isfile(os.path.join(schemafile, "data.plist")):
             raise ValueError('File: %s does not exists' % schemafile)
 
         # options
@@ -62,7 +63,7 @@ class OmniGraffleSchema(object):
         # canvas name
         if not canvasname or len(canvasname) == 0:
             raise Exception('canvasname is missing')
-        logging.debug('Exporting canvas: %s ' % canvasname) 
+        logging.debug('Exporting canvas: %s ' % canvasname)
 
         # format
         if not format or len(format) == 0:
@@ -88,7 +89,7 @@ class OmniGraffleSchema(object):
             new_chksum = self.compute_canvas_checksum(canvasname)
 
             if existing_chksum == new_chksum and existing_chksum != None:
-                logging.debug('No exporting - canvas %s not changed' % 
+                logging.debug('No exporting - canvas %s not changed' %
                               canvasname)
                 return False
             else:
@@ -101,14 +102,16 @@ class OmniGraffleSchema(object):
             if self.verbose:
                 print "%s" % filename
         else:
-            print >> sys.stderr, 'Failed to export canvas: %s to %s' % (canvasname, filename)
+            print >> sys.stderr, 'Failed to export canvas: %s to %s' % \
+                                       (canvasname, filename)
 
         # update checksum
         if format == 'pdf':
             # save the checksum
             url = NSURL.fileURLWithPath_(filename)
             pdfdoc = PDFKit.PDFDocument.alloc().initWithURL_(url)
-            attrs = NSMutableDictionary.alloc().initWithDictionary_(pdfdoc.documentAttributes())
+            attrs = NSMutableDictionary.alloc().initWithDictionary_(
+                        pdfdoc.documentAttributes())
 
             attrs[PDFKit.PDFDocumentSubjectAttribute] = \
                 '%s%s' % (OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE, chksum)
@@ -125,8 +128,9 @@ class OmniGraffleSchema(object):
         """
 
         for c in self.get_canvas_list():
-            targetfile = os.path.join(os.path.abspath(targetdir), namemap(c, fmt))
-            logging.debug("Exporting `%s' into `%s' as %s" % 
+            targetfile = os.path.join(os.path.abspath(targetdir),
+                                      namemap(c, fmt))
+            logging.debug("Exporting `%s' into `%s' as %s" %
                           (c, targetfile, fmt))
             self.export(c, targetfile, fmt, force)
 
@@ -148,7 +152,7 @@ class OmniGraffleSchema(object):
         if len(canvas) == 1:
             canvas = canvas[0]
         else:
-            logging.warn('Canvas %s does not exist in %s' % 
+            logging.warn('Canvas %s does not exist in %s' %
                          (canvasname, self.schemafile))
             return False
 
@@ -160,7 +164,8 @@ class OmniGraffleSchema(object):
         else:
             self.doc.save(as_=export_format, in_=filename)
 
-        logging.debug("Exported `%s' into `%s' as %s" % (canvasname, file, format))
+        logging.debug("Exported `%s' into `%s' as %s" % (canvasname, file,
+                                                         format))
         return True
 
 def checksum(filepath):
@@ -209,7 +214,8 @@ def export(source, target, options):
             canvasname = canvasname[:canvasname.rfind('.')]
 
         if not canvasname or len(canvasname) == 0:
-            print >> sys.stderr, "Without canvas name, the target (-t) must be a directory"
+            print >> sys.stderr, "Without canvas name, the target (-t) "\
+                                       "must be a directory"
             sys.exit(1)
 
     # determine the format
@@ -235,18 +241,23 @@ def main():
     usage = "Usage: %prog [options] <source> <target>"
     parser = optparse.OptionParser(usage=usage)
 
-    parser.add_option('-c', 
-                      help='canvas name. If not given it will be guessed from the target filename unless it is a directory.', 
+    parser.add_option('-c',
+                      help='canvas name. If not given it will be guessed from '
+                      'the target filename unless it is a directory.',
                       metavar='NAME', dest='canvasname')
-    parser.add_option('-f', 
-                      help='format (one of: pdf, png, svg, eps). Guessed from the target filename suffix unless it is a directory. Defaults to pdf',
+    parser.add_option('-f',
+                      help='format (one of: pdf, png, svg, eps). Guessed '
+                      'from the target filename suffix unless it is a '
+                      'directory. Defaults to pdf',
                       metavar='FMT', dest='format')
-    parser.add_option('--force', action='store_true', help='force the export', 
+    parser.add_option('--force', action='store_true', help='force the export',
                       dest='force')
     parser.add_option('-v', action='store_true', help='verbose', dest='verbose')
-    parser.add_option('--verbose', action='store_true', help='verbose', dest='verbose')
+    parser.add_option('--verbose', action='store_true', help='verbose',
+                      dest='verbose')
     parser.add_option('-d', action='store_true', help='debug', dest='debug')
-    parser.add_option('--debug', action='store_true', help='debug', dest='debug')
+    parser.add_option('--debug', action='store_true', help='debug',
+                      dest='debug')
 
     (options, args) = parser.parse_args()
 
@@ -260,4 +271,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
