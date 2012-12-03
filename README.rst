@@ -40,7 +40,7 @@ Usage
       -f FMT      format (one of: pdf, png, svg, eps). Guessed from the target
                   filename suffix unless it is a directory. Defaults to pdf
       --force     force the export
-      -v          verbose
+      --debug     print out debug messages
 
 If the target file exists it tries to determine whether the canvas has
 been changed. It does that by comparing the checkums. Since the PDF
@@ -133,3 +133,35 @@ An example preprocesor in Python using `frabric <http://docs.fabfile.org/en/1.4.
                     m = omnigraffle_re.match(l.strip())
                     if m:
                         _convert(*m.groups())
+
+Export on Demand
+----------------
+
+The `omnigraffle-export` can be used either in a batch mode or in a more interactive way. For example it can be used to export the currently selected canvas into a file.
+
+Following is an example Python script that will export currently active canvas into a PDF file that has the same name as the canvas and is placed in the same directory as the OmniGraffle document:
+
+::
+    #!/usr/bin/env python
+
+    import os
+    import sys
+    import omnigraffle
+
+    og = omnigraffle.OmniGraffle()
+    schema = og.active_document()
+
+    schema_path = schema.path
+    schema_fname = os.path.basename(schema_path)
+    schema_dir = os.path.dirname(schema_path)
+    export_info_fname = os.path.join(schema_dir, '.' + schema_fname[0:schema_fname.rindex('.')] + '.omnigraffle_export')
+
+    canvas_name = schema.active_canvas_name()
+
+    format = 'pdf'
+    target_path =  os.path.join(schema_dir, canavs_name + '.' + format)
+
+    schema.export(canvas_name, target_path, format=format)
+
+Fancier version can be download `here <https://gist.github.com/4195669>`.
+

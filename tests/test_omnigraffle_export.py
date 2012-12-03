@@ -5,6 +5,7 @@ import shutil
 import time
 import logging
 
+import omnigraffle
 import omnigraffle_export
 
 class OmniGraffleExportTest(unittest.TestCase):
@@ -14,10 +15,10 @@ class OmniGraffleExportTest(unittest.TestCase):
         self.files_to_remove = []
 
     def setUp(self):
-        path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+        self.path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                             'test_data', 'basic', 'test.graffle')
-        self.schema = omnigraffle_export.OmniGraffleSchema(path)
-        self.assertTrue(self.schema != None)
+        # self.schema = omnigraffle.OmniGraffle().open(self.path)
+        # self.assertTrue(self.schema != None)
 
         logging.basicConfig(level=logging.DEBUG)
 
@@ -29,50 +30,51 @@ class OmniGraffleExportTest(unittest.TestCase):
                 os.unlink(f)
 
     def testGetCanvasList(self):
-        self.assertEqual(['Canvas 1', 'Canvas 2'], self.schema.get_canvas_list())
+        schema = omnigraffle.OmniGraffle().open(self.path)
+        self.assertEqual(['Canvas 1', 'Canvas 2'], schema.get_canvas_list())
 
-    def testExport(self):
-        tmpfile = self.genTempFileName('pdf')
+    # def testExport(self):
+    #     tmpfile = self.genTempFileName('pdf')
 
-        self.assertTrue(self.schema.export('Canvas 1', tmpfile))
-        chksum = omnigraffle_export.checksum(tmpfile)
+    #     self.assertTrue(self.schema.export('Canvas 1', tmpfile))
 
-        self.assertFalse(self.schema.export('Canvas 1', tmpfile))
-        self.assertEqual(chksum, omnigraffle_export.checksum(tmpfile))
+    #     self.assertFalse(self.schema.export('Canvas 1', tmpfile))
 
-        self.files_to_remove.append(tmpfile)
+    #     self.files_to_remove.append(tmpfile)
 
     def testExportWithForceOption(self):
+        schema = omnigraffle.OmniGraffle().open(self.path)
+
         tmpfile = self.genTempFileName('pdf')
 
-        self.assertTrue(self.schema.export('Canvas 1', tmpfile))
-        chksum = omnigraffle_export.checksum(tmpfile)
+        self.assertTrue(omnigraffle_export.export_one(schema, tmpfile, 'Canvas 1'))
         time.sleep(2)
 
-        self.assertTrue(self.schema.export('Canvas 1', tmpfile, force=True))
-        self.assertNotEqual(chksum, omnigraffle_export.checksum(tmpfile))
+        self.assertTrue(omnigraffle_export.export_one(schema, tmpfile, 'Canvas 1', force=True))
 
         self.files_to_remove.append(tmpfile)
 
     def testNotExportingIfNotChanged(self):
+        schema = omnigraffle.OmniGraffle().open(self.path)
+
         tmpfile = self.genTempFileName('pdf')
 
-        self.assertTrue(self.schema.export('Canvas 1', tmpfile))
+        self.assertTrue(omnigraffle_export.export_one(schema, tmpfile, 'Canvas 1'))
 
         time.sleep(2)
 
-        self.assertFalse(self.schema.export('Canvas 1', tmpfile))
+        self.assertFalse(omnigraffle_export.export_one(schema, tmpfile, 'Canvas 1'))
 
         time.sleep(2)
 
-        self.assertTrue(self.schema.export('Canvas 1', tmpfile, force=True))
+        self.assertTrue(omnigraffle_export.export_one(schema, tmpfile, 'Canvas 1', force=True))
 
         self.files_to_remove.append(tmpfile)
 
     def testExportAll(self):
         tmpdir = tempfile.mkdtemp()
 
-        self.schema.export_all(tmpdir)
+        omnigraffle_export.export(self.path, tmpdir)
         self.assertTrue(os.path.exists(os.path.join(tmpdir, 'Canvas 1.pdf')))
         self.assertTrue(os.path.exists(os.path.join(tmpdir, 'Canvas 2.pdf')))
 

@@ -9,192 +9,12 @@ import hashlib
 
 from Foundation import NSURL, NSMutableDictionary
 from Quartz import PDFKit
+from omnigraffle import *
 
-from appscript import *
-
-class OmniGraffleSchema(object):
-    """ A class that encapsulates an OmniGraffle schema file"""
-
-    # supported formarts
-    EXPORT_FORMATS = {
-        "eps": "EPS Format",
-        "pdf": "Apple PDF pasteboard type",
-        "png": "PNG",
-        "svg": "Scalable Vector Graphics XML File Type",
-    }
-
-    # attribute header in PDF document that contains the checksum
-    PDF_CHECKSUM_ATTRIBUTE = 'OmnigraffleExportChecksum: '
-
-    def __init__(self, schemafile, verbose=False):
-        """
-        @param schemafile
-        @param verbose
-        """
-
-        schemafile = os.path.abspath(schemafile)
-        if not os.path.isfile(schemafile) and \
-                not os.path.isfile(os.path.join(schemafile, "data.plist")):
-            raise ValueError('File: %s does not exists' % schemafile)
-
-        # options
-        self.verbose = verbose
-
-        self.schemafile = os.path.abspath(schemafile)
-        self.og = app('OmniGraffle Professional 5.app')
-        self.og.activate()
-        self.og.current_export_settings.area_type.set(k.all_graphics)
-        self.doc = self.og.open(self.schemafile)
-
-        logging.debug('Opened OmniGraffle file: ' + self.schemafile)
-
-    def get_canvas_list(self):
-        """
-        Returns a list of names of all the canvases in the document
-        """
-
-        return [c.name() for c in self.doc.canvases()]
-
-    def export(self, canvasname, filename, format='pdf', force=False):
-        """
-        Exports one canvas named {@code canvasname}
-        """
-
-        # canvas name
-        if not canvasname or len(canvasname) == 0:
-            raise Exception('canvasname is missing')
-        logging.debug('Exporting canvas: %s ' % canvasname)
-
-        # format
-        if not format or len(format) == 0:
-            format = 'pdf'
-        else:
-            format = format.lower()
-        if format not in OmniGraffleSchema.EXPORT_FORMATS:
-            raise Exception('Unknown format: %s' % format)
-        logging.debug('Exporting into format: %s ' % format)
-
-        filename = os.path.abspath(filename)
-
-        # suffix
-        if filename[filename.rfind('.')+1:].lower() != format:
-            filename = '%s.%s' % (filename, format)
-        logging.debug('Exporting into: %s ' % filename)
-
-        # checksum
-        chksum = None
-        if os.path.isfile(filename) and not force:
-            existing_chksum = checksum(filename) if format != 'pdf' \
-                                             else checksum_pdf(filename)
-            new_chksum = self.compute_canvas_checksum(canvasname)
-
-            if existing_chksum == new_chksum and existing_chksum != None:
-                logging.debug('No exporting - canvas %s not changed' %
-                              canvasname)
-                return False
-            else:
-                chksum = new_chksum
-
-        elif format == 'pdf':
-            chksum = self.compute_canvas_checksum(canvasname)
-
-        if self._export_internal(canvasname, filename, format):
-            if self.verbose:
-                print "%s" % filename
-        else:
-            print >> sys.stderr, 'Failed to export canvas: %s to %s' % \
-                                       (canvasname, filename)
-
-        # update checksum
-        if format == 'pdf':
-            # save the checksum
-            url = NSURL.fileURLWithPath_(filename)
-            pdfdoc = PDFKit.PDFDocument.alloc().initWithURL_(url)
-            attrs = NSMutableDictionary.alloc().initWithDictionary_(
-                        pdfdoc.documentAttributes())
-
-            attrs[PDFKit.PDFDocumentSubjectAttribute] = \
-                '%s%s' % (OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE, chksum)
-
-            pdfdoc.setDocumentAttributes_(attrs)
-            pdfdoc.writeToFile_(filename)
-
-        return True
-
-    def export_all(self, targetdir, fmt='pdf', force=False,
-                  namemap=lambda c, f: '%s.%s' % (c, f) if f else c):
-        """
-        Exports all canvases
-        """
-
-        for c in self.get_canvas_list():
-            targetfile = os.path.join(os.path.abspath(targetdir),
-                                      namemap(c, fmt))
-            logging.debug("Exporting `%s' into `%s' as %s" %
-                          (c, targetfile, fmt))
-            self.export(c, targetfile, fmt, force)
-
-    def compute_canvas_checksum(self, canvasname):
-        tmpfile = tempfile.mkstemp(suffix='.png')[1]
-        os.unlink(tmpfile)
-
-        assert self._export_internal(canvasname, tmpfile, 'png')
-
-        try:
-            chksum = checksum(tmpfile)
-            return chksum
-        finally:
-            os.unlink(tmpfile)
-
-    def _export_internal(self, canvasname, filename, format):
-         # find canvas
-        canvas = [c for c in self.doc.canvases() if c.name() == canvasname]
-        if len(canvas) == 1:
-            canvas = canvas[0]
-        else:
-            logging.warn('Canvas %s does not exist in %s' %
-                         (canvasname, self.schemafile))
-            return False
-
-        # export
-        self.og.windows.first().canvas.set(canvas)
-        export_format = OmniGraffleSchema.EXPORT_FORMATS[format]
-        if (export_format == None):
-            self.doc.save(in_=filename)
-        else:
-            self.doc.save(as_=export_format, in_=filename)
-
-        logging.debug("Exported `%s' into `%s' as %s" % (canvasname, file,
-                                                         format))
-        return True
-
-def checksum(filepath):
-    assert os.path.isfile(filepath), '%s is not a file' % filepath
-
-    c = hashlib.md5()
-    with open(filepath, 'rb') as f:
-        for chunk in iter(lambda: f.read(128), ''):
-            c.update(chunk)
-
-    return c.hexdigest()
-
-def checksum_pdf(filepath):
-    assert os.path.isfile(filepath), '%s is not a file' % filepath
-
-    url = NSURL.fileURLWithPath_(filepath)
-    pdfdoc = PDFKit.PDFDocument.alloc().initWithURL_(url)
-    assert pdfdoc != None
-    chksum = pdfdoc.documentAttributes()[PDFKit.PDFDocumentSubjectAttribute]
-
-    if not chksum.startswith(OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE):
-        return None
-    else:
-        return chksum[len(OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE):]
-
-def export(source, target, options):
+def export(source, target, canvasname=None, format='pdf', debug=False, force=False):
 
     # logging
-    if options.debug:
+    if debug:
         logging.basicConfig(level=logging.DEBUG)
     else:
         logging.basicConfig(level=logging.INFO, format='%(message)s')
@@ -206,7 +26,6 @@ def export(source, target, options):
     export_all = os.path.isdir(target)
 
     # determine the canvas
-    canvasname = options.canvasname
     if not export_all:
         # guess from filename
         if not canvasname:
@@ -219,23 +38,117 @@ def export(source, target, options):
             sys.exit(1)
 
     # determine the format
-    format = options.format
     if not export_all:
         # guess from the suffix
         if not format:
             format = target[target.rfind('.')+1:]
+
+    if not format or len(format) == 0:
+        format = 'pdf'
+    else:
+        format = format.lower()
 
     # check source
     if not os.access(source, os.R_OK):
         print >> sys.stderr, "File: %s could not be opened for reading" % source
         sys.exit(1)
 
-    schema = OmniGraffleSchema(source, verbose=options.verbose)
+    og = OmniGraffle()
+    schema = og.open(source)
 
     if export_all:
-        schema.export_all(target, format, force=options.force)
+        namemap=lambda c, f: '%s.%s' % (c, f) if f else c
+
+        for c in schema.get_canvas_list():
+            targetfile = os.path.join(os.path.abspath(target),
+                                      namemap(c, format))
+            logging.debug("Exporting `%s' into `%s' as %s" %
+                          (c, targetfile, format))
+            export_one(schema, targetfile, c, format, force)
     else:
-        schema.export(canvasname, target, format, options.force)
+        export_one(schema, target, canvasname, format, force)
+
+def export_one(schema, filename, canvasname, format='pdf', force=False):
+    def _checksum(filepath):
+        assert os.path.isfile(filepath), '%s is not a file' % filepath
+
+        c = hashlib.md5()
+        with open(filepath, 'rb') as f:
+            for chunk in iter(lambda: f.read(128), ''):
+                c.update(chunk)
+
+        return c.hexdigest()
+
+    def _checksum_pdf(filepath):
+        assert os.path.isfile(filepath), '%s is not a file' % filepath
+
+        url = NSURL.fileURLWithPath_(filepath)
+        pdfdoc = PDFKit.PDFDocument.alloc().initWithURL_(url)
+        
+        assert pdfdoc != None
+        
+        chsum = None
+        attrs = pdfdoc.documentAttributes()
+        if PDFKit.PDFDocumentSubjectAttribute in attrs:
+            chksum = pdfdoc.documentAttributes()[PDFKit.PDFDocumentSubjectAttribute]
+        else:
+            return None
+
+        if not chksum.startswith(OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE):
+            return None
+        else:
+            return chksum[len(OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE):]
+
+    def _compute_canvas_checksum(canvasname):
+        tmpfile = tempfile.mkstemp(suffix='.png')[1]
+        os.unlink(tmpfile)
+
+        export_one(schema, tmpfile, canvasname, 'png')
+
+        try:
+            chksum = _checksum(tmpfile)
+            return chksum
+        finally:
+            os.unlink(tmpfile)
+
+    # checksum
+    chksum = None
+    if os.path.isfile(filename) and not force:
+        existing_chksum = _checksum(filename) if format != 'pdf' \
+                                              else _checksum_pdf(filename)
+
+        new_chksum = _compute_canvas_checksum(canvasname)
+
+        if existing_chksum == new_chksum and existing_chksum != None:
+            logging.debug('Not exporting `%s` into `%s` as `%s` - canvas has not been changed' % (canvasname, filename, format))
+            return False
+        else:
+            chksum = new_chksum
+
+    elif format == 'pdf':
+        chksum = _compute_canvas_checksum(canvasname)
+
+    try:
+        schema.export(canvasname, filename, format=format)
+    except RuntimeError as e:
+        print >> sys.stderr, e.message
+        return False
+
+    # update checksum
+    if format == 'pdf':
+        # save the checksum
+        url = NSURL.fileURLWithPath_(filename)
+        pdfdoc = PDFKit.PDFDocument.alloc().initWithURL_(url)
+        attrs = NSMutableDictionary.alloc().initWithDictionary_(pdfdoc.documentAttributes())
+
+        attrs[PDFKit.PDFDocumentSubjectAttribute] = \
+            '%s%s' % (OmniGraffleSchema.PDF_CHECKSUM_ATTRIBUTE, chksum)
+
+        pdfdoc.setDocumentAttributes_(attrs)
+        pdfdoc.writeToFile_(filename)
+
+    return True
+
 
 def main():
     usage = "Usage: %prog [options] <source> <target>"
@@ -252,10 +165,6 @@ def main():
                       metavar='FMT', dest='format')
     parser.add_option('--force', action='store_true', help='force the export',
                       dest='force')
-    parser.add_option('-v', action='store_true', help='verbose', dest='verbose')
-    parser.add_option('--verbose', action='store_true', help='verbose',
-                      dest='verbose')
-    parser.add_option('-d', action='store_true', help='debug', dest='debug')
     parser.add_option('--debug', action='store_true', help='debug',
                       dest='debug')
 
@@ -267,7 +176,7 @@ def main():
 
     (source, target) = args
 
-    export(source, target, options)
+    export(source, target, canvasname, format, debug, force)
 
 if __name__ == '__main__':
     main()
