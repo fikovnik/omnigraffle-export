@@ -142,6 +142,7 @@ The `omnigraffle-export` can be used either in a batch mode or in a more interac
 Following is an example Python script that will export currently active canvas into a PDF file that has the same name as the canvas and is placed in the same directory as the OmniGraffle document:
 
 ::
+
     #!/usr/bin/env python
 
     import os
@@ -163,5 +164,5 @@ Following is an example Python script that will export currently active canvas i
 
     schema.export(canvas_name, target_path, format=format)
 
-Fancier version can be download `here <https://gist.github.com/4195669>`.
+Fancier version can be download `here <https://gist.github.com/4195669>`_.
 
