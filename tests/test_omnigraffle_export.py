@@ -33,14 +33,16 @@ class OmniGraffleExportTest(unittest.TestCase):
         schema = omnigraffle.OmniGraffle().open(self.path)
         self.assertEqual(['Canvas 1', 'Canvas 2'], schema.get_canvas_list())
 
-    # def testExport(self):
-    #     tmpfile = self.genTempFileName('pdf')
+    def testExport(self):
+        schema = omnigraffle.OmniGraffle().open(self.path)
+        
+        tmpfile = self.genTempFileName('pdf')
 
-    #     self.assertTrue(self.schema.export('Canvas 1', tmpfile))
+        self.assertTrue(self.schema.export('Canvas 1', tmpfile))
 
-    #     self.assertFalse(self.schema.export('Canvas 1', tmpfile))
+        self.assertFalse(self.schema.export('Canvas 1', tmpfile))
 
-    #     self.files_to_remove.append(tmpfile)
+        self.files_to_remove.append(tmpfile)
 
     def testExportWithForceOption(self):
         schema = omnigraffle.OmniGraffle().open(self.path)
