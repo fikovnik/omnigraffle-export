@@ -176,7 +176,8 @@ def main():
 
     (source, target) = args
 
-    export(source, target, canvasname, format, debug, force)
+    export(source, target, options.canvasname, options.format, 
+        options.debug, options.force)
 
 if __name__ == '__main__':
     main()
