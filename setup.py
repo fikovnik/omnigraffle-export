@@ -30,7 +30,7 @@ setup (
     ],
     entry_points = {
         'console_scripts': [
-            'omnigraffle-export = omnigraffle_export:main',
+            'omnigraffle-export = omnigraffle_export.omnigraffle_export:main',
         ],
     },
     test_suite = 'tests',
