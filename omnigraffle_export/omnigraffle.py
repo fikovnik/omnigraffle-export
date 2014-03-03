@@ -28,6 +28,10 @@ class OmniGraffleSchema(object):
         self.doc = doc
         self.path = doc.path()
 
+    def sandboxed(self):
+        # real check using '/usr/bin/codesign --display --entitlements - /Applications/OmniGraffle.app'
+        return self.og.version()[0] == '6' and os.path.exists(OmniGraffle.SANDBOXED_DIR_6)
+        
     def get_canvas_list(self):
         """
         Returns a list of names of all the canvases in the document
@@ -60,11 +64,22 @@ class OmniGraffleSchema(object):
         # export
         self.og.windows.first().canvas.set(canvas)
         export_format = OmniGraffleSchema.EXPORT_FORMATS[format]
+
+        export_path = fname
+        # Is OmniGraffle sandboxed?
+        if self.sandboxed:
+            export_path = os.path.expanduser(OmniGraffle.SANDBOXED_DIR_6) + os.path.basename(fname)
+            logging.debug('OmniGraffle is sandboxed - exporting to: %s' % export_path)
+
         # FIXME: does this return something or throw something?
         if (export_format == None):
-            self.doc.save(in_=fname)
+            self.doc.save(in_=export_path)
         else:
-            self.doc.save(as_=export_format, in_=fname)
+            self.doc.save(as_=export_format, in_=export_path)
+
+        if self.sandboxed:
+            os.rename(export_path, fname)
+            logging.debug('OmniGraffle is sandboxed - moving %s to: %s' % (export_path, fname))
 
         logging.debug("Exported `%s' into `%s' as %s" % (canvasname, fname, format))
 
@@ -83,6 +98,8 @@ class OmniGraffleSchema(object):
         return canvas.name()
 
 class OmniGraffle(object):
+
+    SANDBOXED_DIR_6 = '~/Library/Containers/com.omnigroup.OmniGraffle6/Data/'
 
     def __init__(self):
         names = ['OmniGraffle 5.app', 'OmniGraffle Professional 5.app', 'OmniGraffle']
