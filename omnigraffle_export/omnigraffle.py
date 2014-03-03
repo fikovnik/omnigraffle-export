@@ -85,14 +85,32 @@ class OmniGraffleSchema(object):
 class OmniGraffle(object):
 
     def __init__(self):
-        self.og = app('OmniGraffle 5.app')
+        names = ['OmniGraffle 5.app', 'OmniGraffle Professional 5.app', 'OmniGraffle']
+        self.og = None
+        for name in names:
+            try:
+                self.og = app(name)
+                break
+            except (ApplicationNotFoundError):
+                continue
+
+        if self.og == None:
+            raise RuntimeError('Unable to connect to OmniGraffle (%s)' % ', '.join(names))
 
     def active_document(self):
         self.og.activate()
         window = self.og.windows.first()
         doc = window.document()
 
+        if doc == None:
+            # this means that the active window is actually an OmniGraffle document window
+            # it can be for example the license window
+            # we cannot do anything
+            return None
+
         fname = doc.path()
+        if fname == None:
+            fname = "Untitled"
         logging.debug('Active OmniGraffle file: ' + fname)
 
         return OmniGraffleSchema(self.og, doc)
