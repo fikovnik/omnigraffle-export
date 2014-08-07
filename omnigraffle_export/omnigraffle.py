@@ -67,7 +67,7 @@ class OmniGraffleSchema(object):
 
         export_path = fname
         # Is OmniGraffle sandboxed?
-        if self.sandboxed:
+        if self.sandboxed():
             export_path = os.path.expanduser(OmniGraffle.SANDBOXED_DIR_6) + os.path.basename(fname)
             logging.debug('OmniGraffle is sandboxed - exporting to: %s' % export_path)
 
@@ -77,7 +77,7 @@ class OmniGraffleSchema(object):
         else:
             self.doc.save(as_=export_format, in_=export_path)
 
-        if self.sandboxed:
+        if self.sandboxed():
             os.rename(export_path, fname)
             logging.debug('OmniGraffle is sandboxed - moving %s to: %s' % (export_path, fname))
 
