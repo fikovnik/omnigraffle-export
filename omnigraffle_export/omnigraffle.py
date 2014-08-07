@@ -11,7 +11,7 @@ class OmniGraffleSchema(object):
         "eps": "EPS",
         "pdf": "PDF",
         "png": "PNG",
-        
+
         # FIXME
         # "svg": "SVG",
         # "tiff" : "TIFF",
@@ -30,8 +30,8 @@ class OmniGraffleSchema(object):
 
     def sandboxed(self):
         # real check using '/usr/bin/codesign --display --entitlements - /Applications/OmniGraffle.app'
-        return self.og.version()[0] == '6' and os.path.exists(OmniGraffle.SANDBOXED_DIR_6)
-        
+        return self.og.version()[0] == '6' and os.path.exists(os.path.expanduser(OmniGraffle.SANDBOXED_DIR_6))
+
     def get_canvas_list(self):
         """
         Returns a list of names of all the canvases in the document
@@ -67,7 +67,7 @@ class OmniGraffleSchema(object):
 
         export_path = fname
         # Is OmniGraffle sandboxed?
-        if self.sandboxed:
+        if self.sandboxed():
             export_path = os.path.expanduser(OmniGraffle.SANDBOXED_DIR_6) + os.path.basename(fname)
             logging.debug('OmniGraffle is sandboxed - exporting to: %s' % export_path)
 
@@ -77,7 +77,7 @@ class OmniGraffleSchema(object):
         else:
             self.doc.save(as_=export_format, in_=export_path)
 
-        if self.sandboxed:
+        if self.sandboxed():
             os.rename(export_path, fname)
             logging.debug('OmniGraffle is sandboxed - moving %s to: %s' % (export_path, fname))
 
