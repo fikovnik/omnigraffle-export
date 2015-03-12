@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import os
 from setuptools import setup, find_packages
 from pkg_resources import resource_filename
@@ -15,7 +13,7 @@ setup (
     author = "Filip Krikava",
     author_email = "krikava@gmail.com",
     description = "A command line utility that exports omnigraffle canvases files into various formats.",
-    long_description = read("README.rst"),
+    long_description = read("README.md"),
     license = "http://www.opensource.org/licenses/mit-license.php",
     keywords = "omnigraffle export",
     url = "https://github.com/fikovnik/omnigraffle-export",

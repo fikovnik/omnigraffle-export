@@ -148,3 +148,23 @@ schema.export(canvas_name, target_path, format=format)
 ```
 
 Fancier version can be download [here](https://gist.github.com/4195669).
+
+Making a release
+----------------
+
+- update the version number in `setup.py`
+- rerun tests `$ python setup.py test`
+- commit
+- push
+- register release `$ python setup.py register`
+- upload release `$ python setup.py bdist upload`
+
+Developing omnigraffle-export
+-----------------------------
+
+- clone
+- stage `$ python setup.py develop`
+- make a new feature branch
+- code
+- do release
+- unstage `$python setup.py develop --uninstall`
