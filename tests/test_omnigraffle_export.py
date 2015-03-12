@@ -5,8 +5,8 @@ import shutil
 import time
 import logging
 
-import omnigraffle
-import omnigraffle_export
+from omnigraffle_export import omnigraffle
+from omnigraffle_export import omnigraffle_export
 
 class OmniGraffleExportTest(unittest.TestCase):
 
@@ -38,9 +38,9 @@ class OmniGraffleExportTest(unittest.TestCase):
         
         tmpfile = self.genTempFileName('pdf')
 
-        self.assertTrue(self.schema.export('Canvas 1', tmpfile))
+        self.assertTrue(omnigraffle_export.export_one(schema, tmpfile, 'Canvas 1'))
 
-        self.assertFalse(self.schema.export('Canvas 1', tmpfile))
+        self.assertFalse(omnigraffle_export.export_one(schema, tmpfile, 'Canvas 1'))
 
         self.files_to_remove.append(tmpfile)
 

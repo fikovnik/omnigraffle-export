@@ -11,7 +11,7 @@ class OmniGraffleSchema(object):
         "eps": "EPS",
         "pdf": "PDF",
         "png": "PNG",
-        
+
         # FIXME
         # "svg": "SVG",
         # "tiff" : "TIFF",
@@ -27,6 +27,10 @@ class OmniGraffleSchema(object):
         self.og = og
         self.doc = doc
         self.path = doc.path()
+
+    def sandboxed(self):
+        # real check using '/usr/bin/codesign --display --entitlements - /Applications/OmniGraffle.app'
+        return self.og.version()[0] == '6' and os.path.exists(os.path.expanduser(OmniGraffle.SANDBOXED_DIR_6))
 
     def get_canvas_list(self):
         """
@@ -60,11 +64,22 @@ class OmniGraffleSchema(object):
         # export
         self.og.windows.first().canvas.set(canvas)
         export_format = OmniGraffleSchema.EXPORT_FORMATS[format]
+
+        export_path = fname
+        # Is OmniGraffle sandboxed?
+        if self.sandboxed():
+            export_path = os.path.expanduser(OmniGraffle.SANDBOXED_DIR_6) + os.path.basename(fname)
+            logging.debug('OmniGraffle is sandboxed - exporting to: %s' % export_path)
+
         # FIXME: does this return something or throw something?
         if (export_format == None):
-            self.doc.save(in_=fname)
+            self.doc.save(in_=export_path)
         else:
-            self.doc.save(as_=export_format, in_=fname)
+            self.doc.save(as_=export_format, in_=export_path)
+
+        if self.sandboxed():
+            os.rename(export_path, fname)
+            logging.debug('OmniGraffle is sandboxed - moving %s to: %s' % (export_path, fname))
 
         logging.debug("Exported `%s' into `%s' as %s" % (canvasname, fname, format))
 
@@ -84,15 +99,35 @@ class OmniGraffleSchema(object):
 
 class OmniGraffle(object):
 
+    SANDBOXED_DIR_6 = '~/Library/Containers/com.omnigroup.OmniGraffle6/Data/'
+
     def __init__(self):
-        self.og = app('OmniGraffle 5.app')
+        names = ['OmniGraffle 5.app', 'OmniGraffle Professional 5.app', 'OmniGraffle']
+        self.og = None
+        for name in names:
+            try:
+                self.og = app(name)
+                break
+            except (ApplicationNotFoundError):
+                continue
+
+        if self.og == None:
+            raise RuntimeError('Unable to connect to OmniGraffle (%s)' % ', '.join(names))
 
     def active_document(self):
         self.og.activate()
         window = self.og.windows.first()
         doc = window.document()
 
+        if doc == None:
+            # this means that the active window is actually an OmniGraffle document window
+            # it can be for example the license window
+            # we cannot do anything
+            return None
+
         fname = doc.path()
+        if fname == None:
+            fname = "Untitled"
         logging.debug('Active OmniGraffle file: ' + fname)
 
         return OmniGraffleSchema(self.og, doc)

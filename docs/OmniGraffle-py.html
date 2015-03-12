@@ -1,0 +1,3899 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+
+<title>OmniGraffle.app terminology</title>
+
+<style type="text/css" media="all">
+	h1 {padding-bottom:2px; border-bottom:solid 2px black; margin:0;}
+	h1+p {font-weight:bold; font-size:0.8em; margin-top:1px;}
+	h2 {margin-top:0;}
+	#content {padding-right:8px;}
+	#content > ul > li {margin-bottom:1em;}
+	#sidebar h2 {font-size:1em;}
+	#sidebar ul {padding-left:0; margin-left:1.2em;}
+	#sidebar li {font-size:0.8em; white-space:nowrap;}
+	#sidebar .box {padding-left:8px; border-left:dashed 1px black;}
+	li {list-style-type:none;}
+	a {color:#000; text-decoration:none;}
+	a {border-bottom:dotted 1px black;}
+	a:hover {border-bottom:solid 1px black;}
+</style>
+<style type="text/css" media="screen">
+	h2 span, h3 span {font-family:Courier; font-size:12px;}
+</style>
+<style type="text/css" media="print">
+	body {font-size:10pt;}
+	h1 {font-size:24pt;}
+	h2 {font-size:18pt;}
+	h3 {font-size:14pt;}
+	#sidebar {display:none;}
+</style>
+
+</head><body>
+
+<h1>OmniGraffle.app terminology</h1>
+
+<p>/Applications/OmniGraffle.app</p>
+
+<table>
+<tr>
+<td id="content" valign="top" width="90%">
+	
+		<a name="suite_Standard_Suite" id="suite_Standard_Suite"></a>
+		<h2>Standard Suite</h2>
+
+		<p>Common classes and commands for most applications.</p>
+		
+		
+		
+			<h3>Commands</h3>
+			<ul>
+				<li>
+					<a name="command_close__Standard_Suite"></a>
+					<strong>close</strong>
+					 -- Close an object.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							[<strong>saving</strong> <em>k.ask / k.no / k.yes</em>]
+							 -- Specifies whether changes should be saved before closing.
+						</li>
+<li>
+							[<strong>saving_in</strong> <em>alias</em>]
+							 -- The file in which to save the object.
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_count__Standard_Suite"></a>
+					<strong>count</strong>
+					 -- Return the number of elements of a particular class within an object.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							[<strong>each</strong> <em>type_class</em>]
+							 -- The class of objects to be counted.
+						</li>
+						<li>
+							Result: <em>integer</em>
+							
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="command_delete__Standard_Suite"></a>
+					<strong>delete</strong>
+					 -- Delete an object.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_duplicate__Standard_Suite"></a>
+					<strong>duplicate</strong>
+					 -- Copy object(s) and put the copies at a new location.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							[<strong>to</strong> <em>location_reference</em>]
+							 -- The location for the new object(s).
+						</li>
+<li>
+							[<strong>with_properties</strong> <em>record</em>]
+							 -- Properties to be set in the new duplicated object(s).
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_exists__Standard_Suite"></a>
+					<strong>exists</strong>
+					 -- Verify if an object exists.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						<li>
+							Result: <em>boolean</em>
+							
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="command_get__Standard_Suite"></a>
+					<strong>get</strong>
+					 -- Get the data for an object.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						<li>
+							Result: <em>anything</em>
+							
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="command_make__Standard_Suite"></a>
+					<strong>make</strong>
+					 -- Make a new object.
+					<ul>
+						
+						<li>
+							<strong>new</strong> <em>type_class</em>
+							 -- The class of the new object.
+						</li>
+<li>
+							[<strong>at</strong> <em>location_reference</em>]
+							 -- The location at which to insert the object.
+						</li>
+<li>
+							[<strong>with_data</strong> <em>anything</em>]
+							 -- The initial data for the object.
+						</li>
+<li>
+							[<strong>with_properties</strong> <em>record</em>]
+							 -- The initial values for properties of the object.
+						</li>
+						<li>
+							Result: <em>reference</em>
+							
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="command_move__Standard_Suite"></a>
+					<strong>move</strong>
+					 -- Move object(s) to a new location.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							<strong>to</strong> <em>location_reference</em>
+							 -- The new location for the object(s).
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_open__Standard_Suite"></a>
+					<strong>open</strong>
+					 -- Open an object.
+					<ul>
+						<li>
+							<em>alias</em>
+							 -- The file(s) to be opened.
+						</li>
+						
+						<li>
+							Result: <em><a href="#class_document__OmniGraffle">document</a></em>
+							
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="command_print___Standard_Suite"></a>
+					<strong>print_</strong>
+					 -- Print an object.
+					<ul>
+						<li>
+							<em>alias</em>
+							 -- The file(s) or document(s) to be printed.
+						</li>
+						<li>
+							[<strong>print_dialog</strong> <em>boolean</em>]
+							 -- Should the application show the Print dialog?
+						</li>
+<li>
+							[<strong>with_properties</strong> <em><a href="#class_print_settings__Type_Definitions">print_settings</a></em>]
+							 -- the print settings
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_quit__Standard_Suite"></a>
+					<strong>quit</strong>
+					 -- Quit an application.
+					<ul>
+						
+						<li>
+							[<strong>saving</strong> <em>k.ask / k.no / k.yes</em>]
+							 -- Specifies whether changes should be saved before quitting.
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_save__Standard_Suite"></a>
+					<strong>save</strong>
+					 -- Save an object.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							[<strong>as_</strong> <em>unicode_text</em>]
+							 -- The file type in which to save the data.
+						</li>
+<li>
+							[<strong>in_</strong> <em>alias</em>]
+							 -- The file in which to save the object.
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_set__Standard_Suite"></a>
+					<strong>set</strong>
+					 -- Set an object's data.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							<strong>to</strong> <em>anything</em>
+							 -- The new value.
+						</li>
+						
+					</ul>
+				</li>
+			</ul>
+		
+		
+		
+		
+			<h3>Classes</h3>
+			<ul>
+				<li>
+					<a name="class_application__Standard_Suite"></a>
+					<strong>application</strong>
+					 -- An application's top level scripting object.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>applications</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_application__OmniGraffle">application</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>frontmost</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Is this the frontmost (active) application?
+								</li>
+<li>
+									<strong>name</strong>
+									(r/o)
+									<em>unicode_text</em>
+									 -- The name of the application.
+								</li>
+<li>
+									<strong>version</strong>
+									(r/o)
+									<em>unicode_text</em>
+									 -- The version of the application.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_document__OmniGraffle">documents</a></strong> -- by
+									<em>name, index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_window__OmniGraffle">windows</a></strong> -- by
+									<em>name, index, relative, range, test, id</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_color__Standard_Suite"></a>
+					<strong>color</strong>
+					 -- A color.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>colors</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_document__Standard_Suite"></a>
+					<strong>document</strong>
+					 -- A document.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>documents</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_document__OmniGraffle">document</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>modified</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Has the document been modified since the last save?
+								</li>
+<li>
+									<strong>name</strong>
+									
+									<em>unicode_text</em>
+									 -- The document's name.
+								</li>
+<li>
+									<strong>path</strong>
+									
+									<em>unicode_text</em>
+									 -- The document's path.
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_item__Standard_Suite"></a>
+					<strong>item</strong>
+					 -- A scriptable object.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>items</li>
+							</ul>
+						</li>
+						
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_application__Standard_Suite">application</a></em></li>
+<li><em><a href="#class_color__Standard_Suite">color</a></em></li>
+<li><em><a href="#class_document__Standard_Suite">document</a></em></li>
+<li><em><a href="#class_window__Standard_Suite">window</a></em></li>
+<li><em><a href="#class_attribute_run__Text_Suite">attribute_run</a></em></li>
+<li><em><a href="#class_character__Text_Suite">character</a></em></li>
+<li><em><a href="#class_paragraph__Text_Suite">paragraph</a></em></li>
+<li><em><a href="#class_text__Text_Suite">text</a></em></li>
+<li><em><a href="#class_word__Text_Suite">word</a></em></li>
+<li><em><a href="#class_attribute_run__Extended_Text_Suite">attribute_run</a></em></li>
+<li><em><a href="#class_character__Extended_Text_Suite">character</a></em></li>
+<li><em><a href="#class_paragraph__Extended_Text_Suite">paragraph</a></em></li>
+<li><em><a href="#class_text__Extended_Text_Suite">text</a></em></li>
+<li><em><a href="#class_word__Extended_Text_Suite">word</a></em></li>
+<li><em><a href="#class_canvas__OmniGraffle">canvas</a></em></li>
+<li><em><a href="#class_column__OmniGraffle">column</a></em></li>
+<li><em><a href="#class_export_settings__OmniGraffle">export_settings</a></em></li>
+<li><em><a href="#class_graphic__OmniGraffle">graphic</a></em></li>
+<li><em><a href="#class_grid__OmniGraffle">grid</a></em></li>
+<li><em><a href="#class_layer__OmniGraffle">layer</a></em></li>
+<li><em><a href="#class_layout_info__OmniGraffle">layout_info</a></em></li>
+<li><em><a href="#class_point___OmniGraffle">point_</a></em></li>
+<li><em><a href="#class_row__OmniGraffle">row</a></em></li>
+<li><em><a href="#class_table_slice__OmniGraffle">table_slice</a></em></li>
+<li><em><a href="#class_user_data_item__OmniGraffle">user_data_item</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>class_</strong>
+									(r/o)
+									<em>type_class</em>
+									 -- The class of the object.
+								</li>
+<li>
+									<strong>properties</strong>
+									
+									<em>record</em>
+									 -- All of the object's properties.
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_window__Standard_Suite"></a>
+					<strong>window</strong>
+					 -- A window.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>windows</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_window__OmniGraffle">window</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>bounds</strong>
+									
+									<em>bounding_rectangle</em>
+									 -- The bounding rectangle of the window.
+								</li>
+<li>
+									<strong>closeable</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Whether the window has a close box.
+								</li>
+<li>
+									<strong>document</strong>
+									(r/o)
+									<em><a href="#class_document__OmniGraffle">document</a></em>
+									 -- The document whose contents are being displayed in the window.
+								</li>
+<li>
+									<strong>floating</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Whether the window floats.
+								</li>
+<li>
+									<strong>id</strong>
+									(r/o)
+									<em>integer</em>
+									 -- The unique identifier of the window.
+								</li>
+<li>
+									<strong>index</strong>
+									
+									<em>integer</em>
+									 -- The index of the window, ordered front to back.
+								</li>
+<li>
+									<strong>miniaturizable</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Whether the window can be miniaturized.
+								</li>
+<li>
+									<strong>miniaturized</strong>
+									
+									<em>boolean</em>
+									 -- Whether the window is currently miniaturized.
+								</li>
+<li>
+									<strong>modal</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Whether the window is the application's current modal window.
+								</li>
+<li>
+									<strong>name</strong>
+									
+									<em>unicode_text</em>
+									 -- The full title of the window.
+								</li>
+<li>
+									<strong>resizable</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Whether the window can be resized.
+								</li>
+<li>
+									<strong>titled</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Whether the window has a title bar.
+								</li>
+<li>
+									<strong>visible</strong>
+									
+									<em>boolean</em>
+									 -- Whether the window is currently visible.
+								</li>
+<li>
+									<strong>zoomable</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Whether the window can be zoomed.
+								</li>
+<li>
+									<strong>zoomed</strong>
+									
+									<em>boolean</em>
+									 -- Whether the window is currently zoomed.
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+			</ul>
+		
+		
+	
+
+		<a name="suite_Text_Suite" id="suite_Text_Suite"></a>
+		<h2>Text Suite</h2>
+
+		<p>A set of basic classes for text processing.</p>
+		
+		
+		
+		
+		
+		
+			<h3>Classes</h3>
+			<ul>
+				<li>
+					<a name="class_attachment__Text_Suite"></a>
+					<strong>attachment</strong>
+					 -- Represents an inline text attachment.  This class is used mainly for make commands.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>text_attachments</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_text__Extended_Text_Suite">text</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>file_name</strong>
+									
+									<em>unicode_text</em>
+									 -- The path to the file for the attachment
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_attribute_run__Text_Suite"></a>
+					<strong>attribute_run</strong>
+					 -- This subdivides the text into chunks that all have the same attributes.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>attribute_runs</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_text_attachment__Extended_Text_Suite">text_attachments</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_character__Text_Suite"></a>
+					<strong>character</strong>
+					 -- This subdivides the text into characters.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>characters</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_text_attachment__Extended_Text_Suite">text_attachments</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_paragraph__Text_Suite"></a>
+					<strong>paragraph</strong>
+					 -- This subdivides the text into paragraphs.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>paragraphs</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_text_attachment__Extended_Text_Suite">text_attachments</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_text__Text_Suite"></a>
+					<strong>text</strong>
+					 -- Rich (styled) text
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>texts</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_attachment__Text_Suite">attachment</a></em></li>
+<li><em><a href="#class_text_attachment__Extended_Text_Suite">text_attachment</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_text_attachment__Extended_Text_Suite">text_attachments</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_word__Text_Suite"></a>
+					<strong>word</strong>
+					 -- This subdivides the text into words.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>words</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_text_attachment__Extended_Text_Suite">text_attachments</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		
+		
+	
+
+		<a name="suite_Extended_Text_Suite" id="suite_Extended_Text_Suite"></a>
+		<h2>Extended Text Suite</h2>
+
+		<p>Extended functionality for text.</p>
+		
+		
+		
+			<h3>Commands</h3>
+			<ul>
+				<li>
+					<a name="command_bold__Extended_Text_Suite"></a>
+					<strong>bold</strong>
+					 -- Bold some text
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_italicize__Extended_Text_Suite"></a>
+					<strong>italicize</strong>
+					 -- Italicize some text
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_replace__Extended_Text_Suite"></a>
+					<strong>replace</strong>
+					
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							<strong>replacement</strong> <em>unicode_text</em>
+							 -- Replacement string
+						</li>
+<li>
+							[<strong>ignore_case</strong> <em>boolean</em>]
+							 -- When doing a string replace (not regular expression), this controls whether to consider differences in case as significant.
+						</li>
+<li>
+							[<strong>regexp</strong> <em>unicode_text</em>]
+							 -- Regular expression to find
+						</li>
+<li>
+							[<strong>string_</strong> <em>unicode_text</em>]
+							 -- String to find
+						</li>
+<li>
+							[<strong>whole_words</strong> <em>boolean</em>]
+							 -- When doing a string replace (not regular expression), this controls whether the pattern only matches whole words.
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_unbold__Extended_Text_Suite"></a>
+					<strong>unbold</strong>
+					 -- Unbold some text
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_underline__Extended_Text_Suite"></a>
+					<strong>underline</strong>
+					 -- Underline some text
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_unitalicize__Extended_Text_Suite"></a>
+					<strong>unitalicize</strong>
+					 -- Unitalicize some text
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_ununderline__Extended_Text_Suite"></a>
+					<strong>ununderline</strong>
+					 -- Ununderline some text
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+			</ul>
+		
+		
+		
+		
+			<h3>Classes</h3>
+			<ul>
+				<li>
+					<a name="class_attribute_run__Extended_Text_Suite"></a>
+					<strong>attribute_run</strong>
+					 -- This subdivides the text into chunks that all have the same attributes.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>attribute_runs</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>alignment</strong>
+									
+									<em>k.center / k.justified / k.left / k.natural / k.right</em>
+									 -- Alignment of the text.
+								</li>
+<li>
+									<strong>baseline_offset</strong>
+									
+									<em>short_float</em>
+									 -- Number of pixels shifted above or below the normal baseline.
+								</li>
+<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+<li>
+									<strong>superscript</strong>
+									
+									<em>integer</em>
+									 -- The superscript level of the text.
+								</li>
+<li>
+									<strong>text</strong>
+									
+									<em>unicode_text</em>
+									 -- The actual text content.
+								</li>
+<li>
+									<strong>underlined</strong>
+									
+									<em>boolean</em>
+									 -- Is the first character underlined?
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_character__Extended_Text_Suite"></a>
+					<strong>character</strong>
+					 -- This subdivides the text into characters.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>characters</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>alignment</strong>
+									
+									<em>k.center / k.justified / k.left / k.natural / k.right</em>
+									 -- Alignment of the text.
+								</li>
+<li>
+									<strong>baseline_offset</strong>
+									
+									<em>short_float</em>
+									 -- Number of pixels shifted above or below the normal baseline.
+								</li>
+<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+<li>
+									<strong>superscript</strong>
+									
+									<em>integer</em>
+									 -- The superscript level of the text.
+								</li>
+<li>
+									<strong>text</strong>
+									
+									<em>unicode_text</em>
+									 -- The actual text content.
+								</li>
+<li>
+									<strong>underlined</strong>
+									
+									<em>boolean</em>
+									 -- Is the first character underlined?
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_paragraph__Extended_Text_Suite"></a>
+					<strong>paragraph</strong>
+					 -- This subdivides the text into paragraphs.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>paragraphs</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>alignment</strong>
+									
+									<em>k.center / k.justified / k.left / k.natural / k.right</em>
+									 -- Alignment of the text.
+								</li>
+<li>
+									<strong>baseline_offset</strong>
+									
+									<em>short_float</em>
+									 -- Number of pixels shifted above or below the normal baseline.
+								</li>
+<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+<li>
+									<strong>superscript</strong>
+									
+									<em>integer</em>
+									 -- The superscript level of the text.
+								</li>
+<li>
+									<strong>text</strong>
+									
+									<em>unicode_text</em>
+									 -- The actual text content.
+								</li>
+<li>
+									<strong>underlined</strong>
+									
+									<em>boolean</em>
+									 -- Is the first character underlined?
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_text__Extended_Text_Suite"></a>
+					<strong>text</strong>
+					 -- Rich (styled) text
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>texts</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_attachment__Text_Suite">attachment</a></em></li>
+<li><em><a href="#class_text_attachment__Extended_Text_Suite">text_attachment</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>alignment</strong>
+									
+									<em>k.center / k.justified / k.left / k.natural / k.right</em>
+									 -- Alignment of the text.
+								</li>
+<li>
+									<strong>baseline_offset</strong>
+									
+									<em>short_float</em>
+									 -- Number of pixels shifted above or below the normal baseline.
+								</li>
+<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+<li>
+									<strong>superscript</strong>
+									
+									<em>integer</em>
+									 -- The superscript level of the text.
+								</li>
+<li>
+									<strong>text</strong>
+									
+									<em>unicode_text</em>
+									 -- The actual text content.
+								</li>
+<li>
+									<strong>underlined</strong>
+									
+									<em>boolean</em>
+									 -- Is the first character underlined?
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_text_attachment__Extended_Text_Suite"></a>
+					<strong>text_attachment</strong>
+					 -- Represents an inline text attachment.  This class is used mainly for make commands.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>text_attachments</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_text__Extended_Text_Suite">text</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>file_name</strong>
+									
+									<em>unicode_text</em>
+									 -- The path to the file for the attachment
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_word__Extended_Text_Suite"></a>
+					<strong>word</strong>
+					 -- This subdivides the text into words.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>words</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>alignment</strong>
+									
+									<em>k.center / k.justified / k.left / k.natural / k.right</em>
+									 -- Alignment of the text.
+								</li>
+<li>
+									<strong>baseline_offset</strong>
+									
+									<em>short_float</em>
+									 -- Number of pixels shifted above or below the normal baseline.
+								</li>
+<li>
+									<strong>color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The color of the first character.
+								</li>
+<li>
+									<strong>font</strong>
+									
+									<em>unicode_text</em>
+									 -- The name of the font of the first character.
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em>integer</em>
+									 -- The size in points of the first character.
+								</li>
+<li>
+									<strong>superscript</strong>
+									
+									<em>integer</em>
+									 -- The superscript level of the text.
+								</li>
+<li>
+									<strong>text</strong>
+									
+									<em>unicode_text</em>
+									 -- The actual text content.
+								</li>
+<li>
+									<strong>underlined</strong>
+									
+									<em>boolean</em>
+									 -- Is the first character underlined?
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_attribute_run__Extended_Text_Suite">attribute_runs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_character__Extended_Text_Suite">characters</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_paragraph__Extended_Text_Suite">paragraphs</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_word__Extended_Text_Suite">words</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		
+		
+	
+
+		<a name="suite_OmniGraffle" id="suite_OmniGraffle"></a>
+		<h2>OmniGraffle</h2>
+
+		<p>Omni Graffle Script Suite</p>
+		
+		
+		
+			<h3>Commands</h3>
+			<ul>
+				<li>
+					<a name="command_assemble__OmniGraffle"></a>
+					<strong>assemble</strong>
+					 -- Group graphics
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							[<strong>subgraph</strong> <em>boolean</em>]
+							 -- A subgraph with a background
+						</li>
+<li>
+							[<strong>table_shape</strong> <em>list</em>]
+							 -- The shape of a tabular group
+						</li>
+						<li>
+							Result: <em><a href="#class_group__OmniGraffle">group</a></em>
+							
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="command_connect__OmniGraffle"></a>
+					<strong>connect</strong>
+					 -- Draw a line between graphics
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							<strong>to</strong> <em>anything</em>
+							 -- Graphic or graphics to connect to.
+						</li>
+<li>
+							[<strong>with_properties</strong> <em>record</em>]
+							 -- The initial values for properties of the line.
+						</li>
+						<li>
+							Result: <em><a href="#class_line__OmniGraffle">line</a></em>
+							
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="command_flip__OmniGraffle"></a>
+					<strong>flip</strong>
+					 -- Flip graphics
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							<strong>over</strong> <em>k.horizontally / k.vertically</em>
+							 -- Orientation to flip the graphic around
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_import___OmniGraffle"></a>
+					<strong>import_</strong>
+					 -- Open or import a file. The command can optionally specify settings to use when converting other file types to Graffle documents.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							[<strong>categories</strong> <em>boolean</em>]
+							 -- Include class categories when importing source code?
+						</li>
+<li>
+							[<strong>frameworks</strong> <em>boolean</em>]
+							 -- Include frameworks when importing source code?
+						</li>
+<li>
+							[<strong>instance_variable_types</strong> <em>boolean</em>]
+							 -- Include the types of instance variables when importing source code?
+						</li>
+<li>
+							[<strong>instance_variables</strong> <em>boolean</em>]
+							 -- Include instance variables when importing source code?
+						</li>
+<li>
+							[<strong>interaction_allowed</strong> <em>boolean</em>]
+							 -- Is the application allowed to prompt the user for missing import settings? (If this is set to false, then Graffle will return an error rather than prompting the user for missing settings.)
+						</li>
+<li>
+							[<strong>mapping</strong> <em>record</em>]
+							 -- A record or list associating outline column titles with template text field names
+						</li>
+<li>
+							[<strong>method_signatures</strong> <em>boolean</em>]
+							 -- Include the type signatures of methods when importing source code?
+						</li>
+<li>
+							[<strong>methods</strong> <em>boolean</em>]
+							 -- Include method names when importing source code?
+						</li>
+<li>
+							[<strong>outline_template</strong> <em>unicode_text</em>]
+							 -- The name or path of the template to use for importing an outline
+						</li>
+<li>
+							[<strong>protocols</strong> <em>boolean</em>]
+							 -- Include protocol definitions when importing source code?
+						</li>
+						<li>
+							Result: <em><a href="#class_document__OmniGraffle">document</a></em>
+							
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="command_layout__OmniGraffle"></a>
+					<strong>layout</strong>
+					 -- Layout some graphics, or a whole document using the document's Layout Info.
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_page_adjust__OmniGraffle"></a>
+					<strong>page_adjust</strong>
+					 -- Change the number of pages to fit the current graphics
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="command_slide__OmniGraffle"></a>
+					<strong>slide</strong>
+					 -- Slide graphics by a vector amount
+					<ul>
+						<li>
+							<em>reference</em>
+							 -- the object for the command
+						</li>
+						<li>
+							<strong>by</strong> <em><a href="#class_point___OmniGraffle">point_</a></em>
+							 -- The x and y amounts to shift the graphics
+						</li>
+						
+					</ul>
+				</li>
+			</ul>
+		
+		
+		
+		
+			<h3>Classes</h3>
+			<ul>
+				<li>
+					<a name="class_application__OmniGraffle"></a>
+					<strong>application</strong>
+					 -- OmniGraffle
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>applications</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_application__Standard_Suite">application</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>available_templates</strong>
+									(r/o)
+									<em>list</em>
+									 -- A list of document templates that are currently available.
+								</li>
+<li>
+									<strong>current_export_settings</strong>
+									(r/o)
+									<em><a href="#class_export_settings__OmniGraffle">export_settings</a></em>
+									 -- The current export settings
+								</li>
+<li>
+									<strong>demo</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Is this the demo version of the application
+								</li>
+<li>
+									<strong>professional</strong>
+									(r/o)
+									<em>boolean</em>
+									 -- Whether this application is OmniGraffle or OmniGraffle Professional
+								</li>
+<li>
+									<strong>self</strong>
+									(r/o)
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic clicked to start this script
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_canvas__OmniGraffle"></a>
+					<strong>canvas</strong>
+					 -- A canvas
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>canvases</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>adjusts_pages</strong>
+									
+									<em>boolean</em>
+									 -- Adjust number of pages on the canvas automatically?
+								</li>
+<li>
+									<strong>canvasBackground</strong>
+									(r/o)
+									<em><a href="#class_solid__OmniGraffle">solid</a></em>
+									 -- Canvas background graphic
+								</li>
+<li>
+									<strong>canvasSize</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Size of the canvas (page size multiplied by number of pages)
+								</li>
+<li>
+									<strong>columnAlignment</strong>
+									
+									<em>k.center / k.left / k.right</em>
+									 -- Column alignment
+								</li>
+<li>
+									<strong>columnSpacing</strong>
+									
+									<em>short_float</em>
+									 -- Spacing between graphics in a column
+								</li>
+<li>
+									<strong>grid</strong>
+									
+									<em><a href="#class_grid__OmniGraffle">grid</a></em>
+									 -- Settings for the grid
+								</li>
+<li>
+									<strong>horizontal_pages</strong>
+									
+									<em>integer</em>
+									 -- Horizontal pages
+								</li>
+<li>
+									<strong>id</strong>
+									
+									<em>integer</em>
+									 -- Unique identifier
+								</li>
+<li>
+									<strong>layout_info</strong>
+									
+									<em><a href="#class_layout_info__OmniGraffle">layout_info</a></em>
+									 -- Settings for automatic layout
+								</li>
+<li>
+									<strong>name</strong>
+									
+									<em>unicode_text</em>
+									 -- Name of this canvas
+								</li>
+<li>
+									<strong>page_size</strong>
+									(r/o)
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Size of each page
+								</li>
+<li>
+									<strong>rowAlignment</strong>
+									
+									<em>k.bottom / k.center / k.top</em>
+									 -- Row alignment
+								</li>
+<li>
+									<strong>rowSpacing</strong>
+									
+									<em>short_float</em>
+									 -- Spacing between graphics in a row
+								</li>
+<li>
+									<strong>vertical_pages</strong>
+									
+									<em>integer</em>
+									 -- Vertical pages
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_graphic__OmniGraffle">graphics</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_group__OmniGraffle">groups</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_layer__OmniGraffle">layers</a></strong> -- by
+									<em>name, index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_line__OmniGraffle">lines</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_shape__OmniGraffle">shapes</a></strong> -- by
+									<em>name, index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_solid__OmniGraffle">solids</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_subgraph__OmniGraffle">subgraphs</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_column__OmniGraffle"></a>
+					<strong>column</strong>
+					 -- A column (vertical slice) of a table.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>columns</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>size</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- The size of this slice of the table
+								</li>
+<li>
+									<strong>width</strong>
+									
+									<em>short_float</em>
+									 -- The width of this table row or table column
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_graphic__OmniGraffle">graphics</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_connectable_shape__OmniGraffle"></a>
+					<strong>connectable_shape</strong>
+					 -- A shape that can be connected between two graphics
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>connectable_shapes</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_shape__OmniGraffle">shape</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>destination</strong>
+									
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic that the shape is connected to.
+								</li>
+<li>
+									<strong>source</strong>
+									
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic that shape is connected from.
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_document__OmniGraffle"></a>
+					<strong>document</strong>
+					 -- An OmniGraffle document
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>documents</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_document__Standard_Suite">document</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>alignment_guides_enabled</strong>
+									
+									<em>boolean</em>
+									 -- Whether smart alignment guides are enabled
+								</li>
+<li>
+									<strong>distance_guides_enabled</strong>
+									
+									<em>boolean</em>
+									 -- Whether smart distance guides are enabled
+								</li>
+<li>
+									<strong>links_visible</strong>
+									
+									<em>boolean</em>
+									 -- Whether link indicators are visible
+								</li>
+<li>
+									<strong>magnets_visible</strong>
+									
+									<em>boolean</em>
+									 -- Whether magnets are visible
+								</li>
+<li>
+									<strong>page_breaks_visible</strong>
+									
+									<em>boolean</em>
+									 -- Whether page breaks are visible
+								</li>
+<li>
+									<strong>show_guides</strong>
+									
+									<em>boolean</em>
+									 -- Whether manually set guides are visible
+								</li>
+<li>
+									<strong>template</strong>
+									
+									<em>unicode_text</em>
+									 -- Set this to an available template name, or to the path to a Graffle file to use as a template for this document.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_canvas__OmniGraffle">canvases</a></strong> -- by
+									<em>name, index, relative, range, test, id</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_export_settings__OmniGraffle"></a>
+					<strong>export_settings</strong>
+					 -- Export settings
+					<ul>
+						
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>area_type</strong>
+									
+									<em>k.all_graphics / k.current_canvas / k.entire_document / k.manual_region / k.selected_graphics</em>
+									 -- The type of area to be exported
+								</li>
+<li>
+									<strong>border_amount</strong>
+									
+									<em>short_float</em>
+									 -- The number of pixels of border area to include in exported graphics
+								</li>
+<li>
+									<strong>copy_linked_images</strong>
+									
+									<em>boolean</em>
+									 -- Whether to copy in any linked images when exporting in graffle format
+								</li>
+<li>
+									<strong>draws_background</strong>
+									
+									<em>boolean</em>
+									 -- Draw the background canvas color (if false, leaves the background transparent during export).
+								</li>
+<li>
+									<strong>export_read_only</strong>
+									
+									<em>boolean</em>
+									 -- Whether to export in graffle format as a read-only document
+								</li>
+<li>
+									<strong>export_scale</strong>
+									
+									<em>short_float</em>
+									 -- The scale to use during export
+								</li>
+<li>
+									<strong>html_image_type</strong>
+									
+									<em>unicode_text</em>
+									 -- The format to save the image in for HTML image map export
+								</li>
+<li>
+									<strong>include_border</strong>
+									
+									<em>boolean</em>
+									 -- Whether or not to include a border area around the exported graphics
+								</li>
+<li>
+									<strong>origin</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Origin of the manual export region (position of the upper-left corner of the bounding rectangle)
+								</li>
+<li>
+									<strong>resolution</strong>
+									
+									<em>short_float</em>
+									 -- The number of pixels per point in the resulting exported image (1.0 for 72 DPI).
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Size of the manual export region (width and height of the bounding rectangle)
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_graphic__OmniGraffle"></a>
+					<strong>graphic</strong>
+					 -- A graphic
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>graphics</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_group__OmniGraffle">group</a></em></li>
+<li><em><a href="#class_incoming_line__OmniGraffle">incoming_line</a></em></li>
+<li><em><a href="#class_line__OmniGraffle">line</a></em></li>
+<li><em><a href="#class_outgoing_line__OmniGraffle">outgoing_line</a></em></li>
+<li><em><a href="#class_solid__OmniGraffle">solid</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>aligns_edges_to_grid</strong>
+									
+									<em>boolean</em>
+									 -- When snapped to the grid does this graphic align its edges to the grid? (The alternative is to align its center to the grid.)
+								</li>
+<li>
+									<strong>allows_connections</strong>
+									
+									<em>boolean</em>
+									 -- Does this graphic allow connections to it?
+								</li>
+<li>
+									<strong>canvas</strong>
+									(r/o)
+									<em><a href="#class_canvas__OmniGraffle">canvas</a></em>
+									 -- Canvas that this graphic is on
+								</li>
+<li>
+									<strong>corner_radius</strong>
+									
+									<em>short_float</em>
+									 -- Curvature of corners in the stroke path
+								</li>
+<li>
+									<strong>double_stroke</strong>
+									
+									<em>boolean</em>
+									 -- Does this graphic have a double-lined stroke?
+								</li>
+<li>
+									<strong>draws_shadow</strong>
+									
+									<em>boolean</em>
+									 -- Does this graphic draw its shadow?
+								</li>
+<li>
+									<strong>draws_stroke</strong>
+									
+									<em>boolean</em>
+									 -- Does this graphic draw its stroke?
+								</li>
+<li>
+									<strong>flipped_horizontally</strong>
+									
+									<em>boolean</em>
+									 -- Is this graphic flipped horizontally?
+								</li>
+<li>
+									<strong>flipped_vertically</strong>
+									
+									<em>boolean</em>
+									 -- Is this graphic flipped vertically?
+								</li>
+<li>
+									<strong>group</strong>
+									(r/o)
+									<em><a href="#class_group__OmniGraffle">group</a></em>
+									 -- Which group (if any) this graphic is in
+								</li>
+<li>
+									<strong>id</strong>
+									(r/o)
+									<em>integer</em>
+									 -- Unique identifier
+								</li>
+<li>
+									<strong>jump</strong>
+									
+									<em><a href="#class_canvas__OmniGraffle">canvas</a></em>
+									 -- Destination canvas of jump action
+								</li>
+<li>
+									<strong>layer</strong>
+									
+									<em><a href="#class_layer__OmniGraffle">layer</a></em>
+									 -- Which layer this graphic is in
+								</li>
+<li>
+									<strong>locked</strong>
+									
+									<em>boolean</em>
+									 -- Is this graphic locked?
+								</li>
+<li>
+									<strong>notes</strong>
+									
+									<em><a href="#class_text__Extended_Text_Suite">text</a></em>
+									 -- Notes for this graphic
+								</li>
+<li>
+									<strong>origin</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Origin of the graphic (position of the upper-left corner of the bounding rectangle)
+								</li>
+<li>
+									<strong>rank_group</strong>
+									
+									<em>integer</em>
+									 -- Rank group assigned to this graphic for hierarchical layout. There are two special groups: the maximum rank group (which is -1) and the minimum rank group (which is -2)
+								</li>
+<li>
+									<strong>script</strong>
+									
+									<em>unicode_text</em>
+									 -- Source of attached AppleScript
+								</li>
+<li>
+									<strong>shadow_beneath</strong>
+									
+									<em>boolean</em>
+									 -- Does this graphic draw its shadow immediately beneath itself?
+								</li>
+<li>
+									<strong>shadow_color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- Color of the shadow
+								</li>
+<li>
+									<strong>shadow_fuzziness</strong>
+									
+									<em>short_float</em>
+									 -- The 'fuzziness' of the graphic's shadow
+								</li>
+<li>
+									<strong>shadow_vector</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- The direction of the graphic's shadow
+								</li>
+<li>
+									<strong>size</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Size of the graphic (width and height of the bounding rectangle)
+								</li>
+<li>
+									<strong>stroke_cap</strong>
+									
+									<em>k.butt / k.round / k.square</em>
+									 -- Type of cap at ends of the stroke
+								</li>
+<li>
+									<strong>stroke_color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- Color of the stroke
+								</li>
+<li>
+									<strong>stroke_join</strong>
+									
+									<em>k.bevel / k.miter / k.round</em>
+									 -- Type of join between segments of the stroke
+								</li>
+<li>
+									<strong>stroke_pattern</strong>
+									
+									<em>integer</em>
+									 -- Dash pattern of the stroke
+								</li>
+<li>
+									<strong>tag</strong>
+									
+									<em>unicode_text</em>
+									 -- Arbitrary string tag attached to this graphic and available for script use, it is stored as part of user data
+								</li>
+<li>
+									<strong>thickness</strong>
+									
+									<em>short_float</em>
+									 -- Thickness of the stroke
+								</li>
+<li>
+									<strong>url</strong>
+									
+									<em>unicode_text</em>
+									 -- Web link for this graphic
+								</li>
+<li>
+									<strong>user_data</strong>
+									
+									<em>record</em>
+									 -- A dictionary attached to this graphic and available for script use
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_incoming_line__OmniGraffle">incoming_lines</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_line__OmniGraffle">lines</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_outgoing_line__OmniGraffle">outgoing_lines</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_user_data_item__OmniGraffle">user_data_items</a></strong> -- by
+									<em>name, index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_grid__OmniGraffle"></a>
+					<strong>grid</strong>
+					 -- The grid of a canvas
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>grids</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>draws_in_front</strong>
+									
+									<em>boolean</em>
+									 -- Does the grid draw in front of all shapes?
+								</li>
+<li>
+									<strong>major</strong>
+									
+									<em>boolean</em>
+									 -- Does the grid have 'major' lines?
+								</li>
+<li>
+									<strong>major_spacing</strong>
+									
+									<em>integer</em>
+									 -- The number of minor grid lines for each major line
+								</li>
+<li>
+									<strong>script_grid_color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- Color of the grid
+								</li>
+<li>
+									<strong>script_major_grid_color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- Color of major lines
+								</li>
+<li>
+									<strong>snaps</strong>
+									
+									<em>boolean</em>
+									 -- Do points snap to the grid?
+								</li>
+<li>
+									<strong>spacing</strong>
+									
+									<em>short_float</em>
+									 -- Number of pixels between minor grid lines
+								</li>
+<li>
+									<strong>visible</strong>
+									
+									<em>boolean</em>
+									 -- Is the grid visible?
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_group__OmniGraffle"></a>
+					<strong>group</strong>
+					 -- A grouped set of graphics
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>groups</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_graphic__OmniGraffle">graphic</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_subgraph__OmniGraffle">subgraph</a></em></li>
+<li><em><a href="#class_table__OmniGraffle">table</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>connect_to_group_only</strong>
+									
+									<em>boolean</em>
+									 -- Only connect to the group?
+								</li>
+<li>
+									<strong>magnets</strong>
+									
+									<em>list</em>
+									 -- List of magnet points. (In a square from {-0.5,-0.5} to {0.5,0.5}.)
+								</li>
+<li>
+									<strong>rotation_</strong>
+									
+									<em>short_float</em>
+									 -- Rotation of the group in degrees
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_graphic__OmniGraffle">graphics</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_group__OmniGraffle">groups</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_shape__OmniGraffle">shapes</a></strong> -- by
+									<em>name, index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_solid__OmniGraffle">solids</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_subgraph__OmniGraffle">subgraphs</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_incoming_line__OmniGraffle"></a>
+					<strong>incoming_line</strong>
+					 -- Incoming line
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>incoming_lines</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_graphic__OmniGraffle">graphic</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>bezier_point_list</strong>
+									
+									<em>list</em>
+									 -- A list containing all the points and control points of a bezier type line.
+								</li>
+<li>
+									<strong>destination</strong>
+									
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic that the head of the line is connected to.
+								</li>
+<li>
+									<strong>head_magnet</strong>
+									
+									<em>integer</em>
+									 -- Which magnet of the destination graphic the line attaches to
+								</li>
+<li>
+									<strong>head_scale</strong>
+									
+									<em>short_float</em>
+									 -- Scale of line ending on the head of the line (1.0 being the normal size)
+								</li>
+<li>
+									<strong>head_type</strong>
+									
+									<em>unicode_text</em>
+									 -- Type of line ending on the head of the line
+								</li>
+<li>
+									<strong>hop_type</strong>
+									
+									<em>k.bridge_hop / k.gap_hop / k.ignore_hop / k.no_hop / k.round_hop / k.round_under_hop / k.square_hop / k.square_under_hop / k.three_side_hop / k.three_side_under_hop / k.two_side_hop / k.two_side_under_hop</em>
+									 -- The behavior when one line crosses over another line.
+								</li>
+<li>
+									<strong>line_type</strong>
+									
+									<em>k.bezier / k.curved / k.orthogonal / k.straight</em>
+									 -- Type of the line
+								</li>
+<li>
+									<strong>point_list</strong>
+									
+									<em>list</em>
+									 -- A list containing all the points of the line.
+								</li>
+<li>
+									<strong>source</strong>
+									
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic that the tail of the line is connected to.
+								</li>
+<li>
+									<strong>tail_magnet</strong>
+									
+									<em>integer</em>
+									 -- Which magnet of the source graphic the line attaches to
+								</li>
+<li>
+									<strong>tail_scale</strong>
+									
+									<em>short_float</em>
+									 -- Scale of line ending on the tail of the line (1.0 being the normal size)
+								</li>
+<li>
+									<strong>tail_type</strong>
+									
+									<em>unicode_text</em>
+									 -- Type of line ending on the tail of the line
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_label__OmniGraffle">labels</a></strong> -- by
+									<em>name, index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_point___OmniGraffle">points</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_label__OmniGraffle"></a>
+					<strong>label</strong>
+					 -- A label on a line
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>labels</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_shape__OmniGraffle">shape</a></em></li>
+							</ul>
+						</li>
+						
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_layer__OmniGraffle"></a>
+					<strong>layer</strong>
+					 -- A layer
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>layers</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_shared_layer__OmniGraffle">shared_layer</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>locked</strong>
+									
+									<em>boolean</em>
+									 -- are the layer's graphics locked?
+								</li>
+<li>
+									<strong>prints</strong>
+									
+									<em>boolean</em>
+									 -- do the layer's graphics print?
+								</li>
+<li>
+									<strong>visible</strong>
+									
+									<em>boolean</em>
+									 -- are the layer's graphics visible?
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_graphic__OmniGraffle">graphics</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_group__OmniGraffle">groups</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_line__OmniGraffle">lines</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_shape__OmniGraffle">shapes</a></strong> -- by
+									<em>name, index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_solid__OmniGraffle">solids</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_subgraph__OmniGraffle">subgraphs</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_layout_info__OmniGraffle"></a>
+					<strong>layout_info</strong>
+					 -- Automated layout for a canvas
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>layout_infos</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>automatic_layout</strong>
+									
+									<em>boolean</em>
+									 -- Enable/disable automatic layout
+								</li>
+<li>
+									<strong>circular_line_length</strong>
+									
+									<em>short_float</em>
+									 -- Circular layout line length (0-108)
+								</li>
+<li>
+									<strong>direction</strong>
+									
+									<em>k.bottom_to_top / k.left_to_right / k.right_to_left / k.top_to_bottom</em>
+									 -- Hierarchical layout direction
+								</li>
+<li>
+									<strong>force_directed_line_length</strong>
+									
+									<em>short_float</em>
+									 -- Default line length in force directed layout (0.125 - 2.75)
+								</li>
+<li>
+									<strong>force_directed_separation</strong>
+									
+									<em>short_float</em>
+									 -- Separation between objects in force directed layout (0-1)
+								</li>
+<li>
+									<strong>object_separation</strong>
+									
+									<em>short_float</em>
+									 -- Separation between objects in hieararchical layout (in inches)
+								</li>
+<li>
+									<strong>radial_line_length</strong>
+									
+									<em>short_float</em>
+									 -- Radial layout line length (9-200)
+								</li>
+<li>
+									<strong>radial_separation</strong>
+									
+									<em>short_float</em>
+									 -- Separation between objects in radial layout (0-1)
+								</li>
+<li>
+									<strong>rank_separation</strong>
+									
+									<em>short_float</em>
+									 -- Separation between ranks in hieararchical layout (in inches)
+								</li>
+<li>
+									<strong>type</strong>
+									
+									<em>k.circular / k.force_directed / k.hierarchical / k.radial</em>
+									 -- Type of layout to perform
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_line__OmniGraffle"></a>
+					<strong>line</strong>
+					 -- A line
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>lines</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_graphic__OmniGraffle">graphic</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>bezier_point_list</strong>
+									
+									<em>list</em>
+									 -- A list containing all the points and control points of a bezier type line.
+								</li>
+<li>
+									<strong>destination</strong>
+									
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic that the head of the line is connected to.
+								</li>
+<li>
+									<strong>head_magnet</strong>
+									
+									<em>integer</em>
+									 -- Which magnet of the destination graphic the line attaches to
+								</li>
+<li>
+									<strong>head_scale</strong>
+									
+									<em>short_float</em>
+									 -- Scale of line ending on the head of the line (1.0 being the normal size)
+								</li>
+<li>
+									<strong>head_type</strong>
+									
+									<em>unicode_text</em>
+									 -- Type of line ending on the head of the line
+								</li>
+<li>
+									<strong>hop_type</strong>
+									
+									<em>k.bridge_hop / k.gap_hop / k.ignore_hop / k.no_hop / k.round_hop / k.round_under_hop / k.square_hop / k.square_under_hop / k.three_side_hop / k.three_side_under_hop / k.two_side_hop / k.two_side_under_hop</em>
+									 -- The behavior when one line crosses over another line.
+								</li>
+<li>
+									<strong>line_type</strong>
+									
+									<em>k.bezier / k.curved / k.orthogonal / k.straight</em>
+									 -- Type of the line
+								</li>
+<li>
+									<strong>point_list</strong>
+									
+									<em>list</em>
+									 -- A list containing all the points of the line.
+								</li>
+<li>
+									<strong>source</strong>
+									
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic that the tail of the line is connected to.
+								</li>
+<li>
+									<strong>tail_magnet</strong>
+									
+									<em>integer</em>
+									 -- Which magnet of the source graphic the line attaches to
+								</li>
+<li>
+									<strong>tail_scale</strong>
+									
+									<em>short_float</em>
+									 -- Scale of line ending on the tail of the line (1.0 being the normal size)
+								</li>
+<li>
+									<strong>tail_type</strong>
+									
+									<em>unicode_text</em>
+									 -- Type of line ending on the tail of the line
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_label__OmniGraffle">labels</a></strong> -- by
+									<em>name, index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_point___OmniGraffle">points</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_outgoing_line__OmniGraffle"></a>
+					<strong>outgoing_line</strong>
+					 -- Outgoing line
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>outgoing_lines</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_graphic__OmniGraffle">graphic</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>bezier_point_list</strong>
+									
+									<em>list</em>
+									 -- A list containing all the points and control points of a bezier type line.
+								</li>
+<li>
+									<strong>destination</strong>
+									
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic that the head of the line is connected to.
+								</li>
+<li>
+									<strong>head_magnet</strong>
+									
+									<em>integer</em>
+									 -- Which magnet of the destination graphic the line attaches to
+								</li>
+<li>
+									<strong>head_scale</strong>
+									
+									<em>short_float</em>
+									 -- Scale of line ending on the head of the line (1.0 being the normal size)
+								</li>
+<li>
+									<strong>head_type</strong>
+									
+									<em>unicode_text</em>
+									 -- Type of line ending on the head of the line
+								</li>
+<li>
+									<strong>hop_type</strong>
+									
+									<em>k.bridge_hop / k.gap_hop / k.ignore_hop / k.no_hop / k.round_hop / k.round_under_hop / k.square_hop / k.square_under_hop / k.three_side_hop / k.three_side_under_hop / k.two_side_hop / k.two_side_under_hop</em>
+									 -- The behavior when one line crosses over another line.
+								</li>
+<li>
+									<strong>line_type</strong>
+									
+									<em>k.bezier / k.curved / k.orthogonal / k.straight</em>
+									 -- Type of the line
+								</li>
+<li>
+									<strong>point_list</strong>
+									
+									<em>list</em>
+									 -- A list containing all the points of the line.
+								</li>
+<li>
+									<strong>source</strong>
+									
+									<em><a href="#class_graphic__OmniGraffle">graphic</a></em>
+									 -- Graphic that the tail of the line is connected to.
+								</li>
+<li>
+									<strong>tail_magnet</strong>
+									
+									<em>integer</em>
+									 -- Which magnet of the source graphic the line attaches to
+								</li>
+<li>
+									<strong>tail_scale</strong>
+									
+									<em>short_float</em>
+									 -- Scale of line ending on the tail of the line (1.0 being the normal size)
+								</li>
+<li>
+									<strong>tail_type</strong>
+									
+									<em>unicode_text</em>
+									 -- Type of line ending on the tail of the line
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_label__OmniGraffle">labels</a></strong> -- by
+									<em>name, index, relative, range, test, id</em>
+								</li>
+<li>
+									<strong><a href="#class_point___OmniGraffle">points</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_point___OmniGraffle"></a>
+					<strong>point_</strong>
+					 -- A point
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>points</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>x</strong>
+									(r/o)
+									<em>short_float</em>
+									 -- x position
+								</li>
+<li>
+									<strong>y</strong>
+									(r/o)
+									<em>short_float</em>
+									 -- y position
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_polygon__OmniGraffle"></a>
+					<strong>polygon</strong>
+					 -- This class is leftover from the scripting support in OmniGraffle 3. What were formerly polygons are now all custom shapes.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>polygons</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_solid__OmniGraffle">solid</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>arrow_width</strong>
+									
+									<em>short_float</em>
+									 -- The arrow head width (in points) for shapes with &quot;AdjustableArrow&quot; and &quot;AdjustableDoubleArrow&quot; shape names.
+								</li>
+<li>
+									<strong>endAngle</strong>
+									
+									<em>short_float</em>
+									 -- The end angle for shapes with &quot;AdjustableArc&quot; and &quot;AdjustableWedge&quot; shape names.
+								</li>
+<li>
+									<strong>innerRadius</strong>
+									
+									<em>short_float</em>
+									 -- The inner radius (0.05 - 1) for shapes with &quot;AdjustableStar&quot; shape names.
+								</li>
+<li>
+									<strong>name</strong>
+									
+									<em>unicode_text</em>
+									 -- name of the shape for a built-in tool (&quot;Rectangle&quot;, &quot;Circle&quot;, et cetera). A custom shape will be named &quot;Bezier&quot;.
+								</li>
+<li>
+									<strong>point_list</strong>
+									
+									<em>list</em>
+									 -- A list containing all of the control knob points for a custom shape created by the pen tool.
+								</li>
+<li>
+									<strong>shaft_height</strong>
+									
+									<em>short_float</em>
+									 -- The height of the arrow shaft relative to the height of the shape (0-1) for shapes with &quot;AdjustableArrow&quot; and &quot;AdjustableDoubleArrow&quot; shape names.
+								</li>
+<li>
+									<strong>starPoints</strong>
+									
+									<em>integer</em>
+									 -- The number of points for shapes with &quot;AdjustableStar&quot; shape names.
+								</li>
+<li>
+									<strong>startAngle</strong>
+									
+									<em>short_float</em>
+									 -- The start angle for shapes with &quot;AdjustableArc&quot; and &quot;AdjustableWedge&quot; shape names.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_point___OmniGraffle">points</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_row__OmniGraffle"></a>
+					<strong>row</strong>
+					 -- A row (horizontal slice) of a table.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>rows</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>size</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- The size of this slice of the table
+								</li>
+<li>
+									<strong>width</strong>
+									
+									<em>short_float</em>
+									 -- The width of this table row or table column
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_graphic__OmniGraffle">graphics</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_shape__OmniGraffle"></a>
+					<strong>shape</strong>
+					 -- A graphic with a shape
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>shapes</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_solid__OmniGraffle">solid</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_connectable_shape__OmniGraffle">connectable_shape</a></em></li>
+<li><em><a href="#class_label__OmniGraffle">label</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>arrow_width</strong>
+									
+									<em>short_float</em>
+									 -- The arrow head width (in points) for shapes with &quot;AdjustableArrow&quot; and &quot;AdjustableDoubleArrow&quot; shape names.
+								</li>
+<li>
+									<strong>endAngle</strong>
+									
+									<em>short_float</em>
+									 -- The end angle for shapes with &quot;AdjustableArc&quot; and &quot;AdjustableWedge&quot; shape names.
+								</li>
+<li>
+									<strong>innerRadius</strong>
+									
+									<em>short_float</em>
+									 -- The inner radius (0.05 - 1) for shapes with &quot;AdjustableStar&quot; shape names.
+								</li>
+<li>
+									<strong>name</strong>
+									
+									<em>unicode_text</em>
+									 -- name of the shape for a built-in tool (&quot;Rectangle&quot;, &quot;Circle&quot;, et cetera). A custom shape will be named &quot;Bezier&quot;.
+								</li>
+<li>
+									<strong>point_list</strong>
+									
+									<em>list</em>
+									 -- A list containing all of the control knob points for a custom shape created by the pen tool.
+								</li>
+<li>
+									<strong>shaft_height</strong>
+									
+									<em>short_float</em>
+									 -- The height of the arrow shaft relative to the height of the shape (0-1) for shapes with &quot;AdjustableArrow&quot; and &quot;AdjustableDoubleArrow&quot; shape names.
+								</li>
+<li>
+									<strong>starPoints</strong>
+									
+									<em>integer</em>
+									 -- The number of points for shapes with &quot;AdjustableStar&quot; shape names.
+								</li>
+<li>
+									<strong>startAngle</strong>
+									
+									<em>short_float</em>
+									 -- The start angle for shapes with &quot;AdjustableArc&quot; and &quot;AdjustableWedge&quot; shape names.
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_point___OmniGraffle">points</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_shared_layer__OmniGraffle"></a>
+					<strong>shared_layer</strong>
+					 -- A layer that can be shared by multiple canvases
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>shared_layers</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_layer__OmniGraffle">layer</a></em></li>
+							</ul>
+						</li>
+						
+						
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_solid__OmniGraffle"></a>
+					<strong>solid</strong>
+					 -- Any graphic which is solid instead of a line. Includes polygons and shapes.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>solids</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_graphic__OmniGraffle">graphic</a></em></li>
+							</ul>
+						</li>
+						<li>Inherited by:
+							<ul>
+								<li><em><a href="#class_polygon__OmniGraffle">polygon</a></em></li>
+<li><em><a href="#class_shape__OmniGraffle">shape</a></em></li>
+							</ul>
+						</li>
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>autosizing</strong>
+									
+									<em>k.clip / k.full / k.overflow / k.vertically_only</em>
+									 -- Autosizing behavior of the solid around the text
+								</li>
+<li>
+									<strong>blend_color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- For double linear and radial fills, this is the middle blending color.
+								</li>
+<li>
+									<strong>blend_fraction</strong>
+									
+									<em>short_float</em>
+									 -- For double linear and radial fills, this is the position of the blend color from 0 to 1.
+								</li>
+<li>
+									<strong>fill</strong>
+									
+									<em>k.linear_fill / k.no_fill / k.radial_fill / k.solid_fill</em>
+									 -- The type of fill for this solid
+								</li>
+<li>
+									<strong>fill_color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- The fill color. For linear and radial gradient fills this is the starting color
+								</li>
+<li>
+									<strong>gradient_angle</strong>
+									
+									<em>short_float</em>
+									 -- Angle of a linear gradient fill.
+								</li>
+<li>
+									<strong>gradient_center</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Starting point of a radial gradient fill. (In a square from {-1,-1} to {1,1} so {0,0} is the center of the solid.)
+								</li>
+<li>
+									<strong>gradient_color</strong>
+									
+									<em><a href="#class_color__Standard_Suite">color</a></em>
+									 -- For linear and radial fills, this is the ending color.
+								</li>
+<li>
+									<strong>image</strong>
+									
+									<em>unicode_text</em>
+									 -- Set to a file name to load an image fill.
+								</li>
+<li>
+									<strong>image_offset</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- For manual image fills, the offset of the image in the solid
+								</li>
+<li>
+									<strong>image_scale</strong>
+									
+									<em>short_float</em>
+									 -- For manual image fills, the scale of the image
+								</li>
+<li>
+									<strong>image_sizing</strong>
+									
+									<em>k.manual / k.stretched / k.tiled</em>
+									 -- How to size and display the image fill.
+								</li>
+<li>
+									<strong>intercharacter_spacing</strong>
+									
+									<em>short_float</em>
+									 -- Extra space (tracking or kerning) between characters of text
+								</li>
+<li>
+									<strong>interline_spacing</strong>
+									
+									<em>short_float</em>
+									 -- Extra space (leading) between lines of text
+								</li>
+<li>
+									<strong>labelConnection</strong>
+									
+									<em><a href="#class_line__OmniGraffle">line</a></em>
+									 -- If this graphic is a label, the line which it is connected to.
+								</li>
+<li>
+									<strong>labelOffset</strong>
+									
+									<em>short_float</em>
+									 -- If this graphic is a label, the offset from the line which it is connected to.
+								</li>
+<li>
+									<strong>labelPosition</strong>
+									
+									<em>short_float</em>
+									 -- If this graphic is a label, the position along the line which it is connected to.
+								</li>
+<li>
+									<strong>labelRotation</strong>
+									
+									<em>k.custom / k.horizontal / k.parallel / k.perpendicular / k.vertical</em>
+									 -- If this graphic is a label, the type of rotation around the line which it is connected to.
+								</li>
+<li>
+									<strong>magnets</strong>
+									
+									<em>list</em>
+									 -- List of magnet points. (In a square from {-0.5,-0.5} to {0.5,0.5}.)
+								</li>
+<li>
+									<strong>relative_text_rotation</strong>
+									
+									<em>boolean</em>
+									 -- Whether the rotation of the text is from horizontal, or from the shape's existing rotation
+								</li>
+<li>
+									<strong>rotation_</strong>
+									
+									<em>short_float</em>
+									 -- Rotation of the graphic in degrees
+								</li>
+<li>
+									<strong>side_padding</strong>
+									
+									<em>integer</em>
+									 -- Padding at the left and right of the graphic's text space
+								</li>
+<li>
+									<strong>text</strong>
+									
+									<em><a href="#class_text__Extended_Text_Suite">text</a></em>
+									 -- The text inside the solid
+								</li>
+<li>
+									<strong>text_placement</strong>
+									
+									<em>k.bottom / k.center / k.top</em>
+									 -- Placement of the text inside the solid
+								</li>
+<li>
+									<strong>textPosition</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Position of the graphic's text space in proportion to the graphic's size
+								</li>
+<li>
+									<strong>textRotation</strong>
+									
+									<em>short_float</em>
+									 -- Rotation of the graphic's text
+								</li>
+<li>
+									<strong>textSize</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- Size of the graphic's text space in proportion to the graphic's size
+								</li>
+<li>
+									<strong>vertical_padding</strong>
+									
+									<em>integer</em>
+									 -- Padding at the top and bottom of the graphic's text space
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_subgraph__OmniGraffle"></a>
+					<strong>subgraph</strong>
+					 -- A grouped set graphics with a background graphic.  Can be collapsed to show as a single graphic.
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>subgraphs</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_group__OmniGraffle">group</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>background</strong>
+									(r/o)
+									<em><a href="#class_shape__OmniGraffle">shape</a></em>
+									 -- The background for the subgraph
+								</li>
+<li>
+									<strong>bottom_margin</strong>
+									
+									<em>short_float</em>
+									
+								</li>
+<li>
+									<strong>collapsed</strong>
+									
+									<em>boolean</em>
+									 -- Is the subgraph collapsed?
+								</li>
+<li>
+									<strong>left_margin</strong>
+									
+									<em>short_float</em>
+									
+								</li>
+<li>
+									<strong>right_margin</strong>
+									
+									<em>short_float</em>
+									
+								</li>
+<li>
+									<strong>top_margin</strong>
+									
+									<em>short_float</em>
+									
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_table__OmniGraffle"></a>
+					<strong>table</strong>
+					 -- A tabular grouping of graphics
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>tables</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_group__OmniGraffle">group</a></em></li>
+							</ul>
+						</li>
+						
+						
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_column__OmniGraffle">columns</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+<li>
+									<strong><a href="#class_row__OmniGraffle">rows</a></strong> -- by
+									<em>index, relative, range, test</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_table_slice__OmniGraffle"></a>
+					<strong>table_slice</strong>
+					 -- A slice (row or column) of a table
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>table_slices</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>size</strong>
+									
+									<em><a href="#class_point___OmniGraffle">point_</a></em>
+									 -- The size of this slice of the table
+								</li>
+<li>
+									<strong>width</strong>
+									
+									<em>short_float</em>
+									 -- The width of this table row or table column
+								</li>
+							</ul>
+						</li>
+						<li>Elements:
+							<ul>
+								<li>
+									<strong><a href="#class_graphic__OmniGraffle">graphics</a></strong> -- by
+									<em>index, relative, range, test, id</em>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+<li>
+					<a name="class_user_data_item__OmniGraffle"></a>
+					<strong>user_data_item</strong>
+					 -- A user-defined data value
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>user_data_items</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_item__Standard_Suite">item</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>name</strong>
+									(r/o)
+									<em>unicode_text</em>
+									 -- The name of this user-defined data value
+								</li>
+<li>
+									<strong>value</strong>
+									
+									<em>unicode_text</em>
+									 -- User-supplied data value
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+<li>
+					<a name="class_window__OmniGraffle"></a>
+					<strong>window</strong>
+					 -- An OmniGraffle window
+					<ul>
+						<li>Plural name:
+							<ul>
+								<li>windows</li>
+							</ul>
+						</li>
+						<li>Inherits from:
+							<ul>
+								<li><em><a href="#class_window__Standard_Suite">window</a></em></li>
+							</ul>
+						</li>
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>canvas</strong>
+									
+									<em><a href="#class_canvas__OmniGraffle">canvas</a></em>
+									 -- Current canvas this window is viewing
+								</li>
+<li>
+									<strong>selection</strong>
+									
+									<em>list</em>
+									 -- Selected graphics
+								</li>
+<li>
+									<strong>zoom</strong>
+									
+									<em>short_float</em>
+									 -- Current zoom (magnification) setting for this document window
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+			</ul>
+		
+		
+	
+
+		<a name="suite_Type_Definitions" id="suite_Type_Definitions"></a>
+		<h2>Type Definitions</h2>
+
+		<p>Records used in scripting OmniGraffle</p>
+		
+		
+		
+		
+		
+		
+			<h3>Classes</h3>
+			<ul>
+				<li>
+					<a name="class_print_settings__Type_Definitions"></a>
+					<strong>print_settings</strong>
+					
+					<ul>
+						
+						
+						
+						<li>Properties:
+							<ul>
+								<li>
+									<strong>copies</strong>
+									
+									<em>integer</em>
+									 -- the number of copies of a document to be printed
+								</li>
+<li>
+									<strong>collating</strong>
+									
+									<em>boolean</em>
+									 -- Should printed copies be collated?
+								</li>
+<li>
+									<strong>starting_page</strong>
+									
+									<em>integer</em>
+									 -- the first page of the document to be printed
+								</li>
+<li>
+									<strong>ending_page</strong>
+									
+									<em>integer</em>
+									 -- the last page of the document to be printed
+								</li>
+<li>
+									<strong>pages_across</strong>
+									
+									<em>integer</em>
+									 -- number of logical pages laid across a physical page
+								</li>
+<li>
+									<strong>pages_down</strong>
+									
+									<em>integer</em>
+									 -- number of logical pages laid out down a physical page
+								</li>
+<li>
+									<strong>requested_print_time</strong>
+									
+									<em>date</em>
+									 -- the time at which the desktop printer should print the document
+								</li>
+<li>
+									<strong>error_handling</strong>
+									
+									<em>k.standard / k.detailed</em>
+									 -- how errors are handled
+								</li>
+<li>
+									<strong>fax_number</strong>
+									
+									<em>string</em>
+									 -- for fax number
+								</li>
+<li>
+									<strong>target_printer</strong>
+									
+									<em>string</em>
+									 -- for target printer
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</li>
+			</ul>
+		
+		
+	
+</td>
+
+<td id="sidebar" valign="top">
+<div class="box">
+	<h2>Suites</h2>
+	<ul>
+		<li><a href="#suite_Standard_Suite">Standard Suite</a></li>
+<li><a href="#suite_Text_Suite">Text Suite</a></li>
+<li><a href="#suite_Extended_Text_Suite">Extended Text Suite</a></li>
+<li><a href="#suite_OmniGraffle">OmniGraffle</a></li>
+<li><a href="#suite_Type_Definitions">Type Definitions</a></li>
+	</ul>
+	<h2>Commands</h2>
+	<ul>
+		<li><a href="#command_assemble__OmniGraffle">assemble</a></li>
+<li><a href="#command_bold__Extended_Text_Suite">bold</a></li>
+<li><a href="#command_close__Standard_Suite">close</a></li>
+<li><a href="#command_connect__OmniGraffle">connect</a></li>
+<li><a href="#command_count__Standard_Suite">count</a></li>
+<li><a href="#command_delete__Standard_Suite">delete</a></li>
+<li><a href="#command_duplicate__Standard_Suite">duplicate</a></li>
+<li><a href="#command_exists__Standard_Suite">exists</a></li>
+<li><a href="#command_flip__OmniGraffle">flip</a></li>
+<li><a href="#command_get__Standard_Suite">get</a></li>
+<li><a href="#command_import___OmniGraffle">import_</a></li>
+<li><a href="#command_italicize__Extended_Text_Suite">italicize</a></li>
+<li><a href="#command_layout__OmniGraffle">layout</a></li>
+<li><a href="#command_make__Standard_Suite">make</a></li>
+<li><a href="#command_move__Standard_Suite">move</a></li>
+<li><a href="#command_open__Standard_Suite">open</a></li>
+<li><a href="#command_page_adjust__OmniGraffle">page_adjust</a></li>
+<li><a href="#command_print___Standard_Suite">print_</a></li>
+<li><a href="#command_quit__Standard_Suite">quit</a></li>
+<li><a href="#command_replace__Extended_Text_Suite">replace</a></li>
+<li><a href="#command_save__Standard_Suite">save</a></li>
+<li><a href="#command_set__Standard_Suite">set</a></li>
+<li><a href="#command_slide__OmniGraffle">slide</a></li>
+<li><a href="#command_unbold__Extended_Text_Suite">unbold</a></li>
+<li><a href="#command_underline__Extended_Text_Suite">underline</a></li>
+<li><a href="#command_unitalicize__Extended_Text_Suite">unitalicize</a></li>
+<li><a href="#command_ununderline__Extended_Text_Suite">ununderline</a></li>
+	</ul>
+	<h2>Classes</h2>
+	<ul>
+		<li><a href="#class_application__Standard_Suite">application</a></li>
+<li><a href="#class_application__OmniGraffle">application</a></li>
+<li><a href="#class_attachment__Text_Suite">attachment</a></li>
+<li><a href="#class_attribute_run__Text_Suite">attribute_run</a></li>
+<li><a href="#class_attribute_run__Extended_Text_Suite">attribute_run</a></li>
+<li><a href="#class_canvas__OmniGraffle">canvas</a></li>
+<li><a href="#class_character__Text_Suite">character</a></li>
+<li><a href="#class_character__Extended_Text_Suite">character</a></li>
+<li><a href="#class_color__Standard_Suite">color</a></li>
+<li><a href="#class_column__OmniGraffle">column</a></li>
+<li><a href="#class_connectable_shape__OmniGraffle">connectable_shape</a></li>
+<li><a href="#class_document__Standard_Suite">document</a></li>
+<li><a href="#class_document__OmniGraffle">document</a></li>
+<li><a href="#class_export_settings__OmniGraffle">export_settings</a></li>
+<li><a href="#class_graphic__OmniGraffle">graphic</a></li>
+<li><a href="#class_grid__OmniGraffle">grid</a></li>
+<li><a href="#class_group__OmniGraffle">group</a></li>
+<li><a href="#class_incoming_line__OmniGraffle">incoming_line</a></li>
+<li><a href="#class_item__Standard_Suite">item</a></li>
+<li><a href="#class_label__OmniGraffle">label</a></li>
+<li><a href="#class_layer__OmniGraffle">layer</a></li>
+<li><a href="#class_layout_info__OmniGraffle">layout_info</a></li>
+<li><a href="#class_line__OmniGraffle">line</a></li>
+<li><a href="#class_outgoing_line__OmniGraffle">outgoing_line</a></li>
+<li><a href="#class_paragraph__Text_Suite">paragraph</a></li>
+<li><a href="#class_paragraph__Extended_Text_Suite">paragraph</a></li>
+<li><a href="#class_point___OmniGraffle">point_</a></li>
+<li><a href="#class_polygon__OmniGraffle">polygon</a></li>
+<li><a href="#class_print_settings__Type_Definitions">print_settings</a></li>
+<li><a href="#class_row__OmniGraffle">row</a></li>
+<li><a href="#class_shape__OmniGraffle">shape</a></li>
+<li><a href="#class_shared_layer__OmniGraffle">shared_layer</a></li>
+<li><a href="#class_solid__OmniGraffle">solid</a></li>
+<li><a href="#class_subgraph__OmniGraffle">subgraph</a></li>
+<li><a href="#class_table__OmniGraffle">table</a></li>
+<li><a href="#class_table_slice__OmniGraffle">table_slice</a></li>
+<li><a href="#class_text__Text_Suite">text</a></li>
+<li><a href="#class_text__Extended_Text_Suite">text</a></li>
+<li><a href="#class_text_attachment__Extended_Text_Suite">text_attachment</a></li>
+<li><a href="#class_user_data_item__OmniGraffle">user_data_item</a></li>
+<li><a href="#class_window__Standard_Suite">window</a></li>
+<li><a href="#class_window__OmniGraffle">window</a></li>
+<li><a href="#class_word__Text_Suite">word</a></li>
+<li><a href="#class_word__Extended_Text_Suite">word</a></li>
+	</ul>
+</div>
+</td>
+</tr>
+</table>
+</body></html>
