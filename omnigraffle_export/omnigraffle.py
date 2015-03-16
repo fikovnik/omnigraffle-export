@@ -140,6 +140,17 @@ class OmniGraffle(object):
 
         fname = os.path.abspath(fname)
         self.og.activate()
+
+        # adhoc fix for https://github.com/fikovnik/omnigraffle-export/issues/23
+        # apparently the process is sandboxed and cannot access the file
+        # 16/03/2015 13:01:54.000 kernel[0]: Sandbox: OmniGraffle(66840) deny file-read-data test.graffle
+        # therefore we first try to open it manually
+        
+        import subprocess
+        subprocess.call(['open',fname])
+
+        window = self.og.windows.first()
+        # doc = window.document()
         doc = self.og.open(fname)
 
         logging.debug('Opened OmniGraffle file: ' + fname)

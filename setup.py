@@ -7,7 +7,7 @@ def read(fname):
 
 setup (
     name = "omnigraffle-export",
-    version = "1.7",
+    version = "1.7.1",
     packages = find_packages(exclude='tests'),
     install_requires = ['appscript','pyobjc'],
     author = "Filip Krikava",

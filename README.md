@@ -1,7 +1,7 @@
 OmniGraffle Export tool
 =======================
 
-A command line tool that allows to export one or more canvases from [OmniGraffle](http://www.omnigroup.com/products/omnigraffle/) into various formats using [OmniGraffle AppleScript interface][].
+A command line tool that allows to export one or more canvases from [OmniGraffle](http://www.omnigroup.com/products/omnigraffle/) into various formats using [OmniGraffle AppleScript interface](http://www.omnigroup.com/mailman/archive/omnigraffle-users/2008/004785.html).
 
 Installation
 ------------
