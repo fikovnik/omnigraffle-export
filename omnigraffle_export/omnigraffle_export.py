@@ -59,8 +59,8 @@ def export(source, target, canvasname=None, format='pdf', debug=False, force=Fal
         namemap = lambda c, f: '%s.%s' % (c, f) if f else c
 
         for c in schema.get_canvas_list():
-            canvas_file = c.replace(":", "_")
-            canvas_file = canvas_file.replace("/", "_")
+            canvas_file = c.replace(":", "")
+            canvas_file = canvas_file.replace("/", "")
 
             targetfile = os.path.join(os.path.abspath(target),
                                       namemap(canvas_file, format))
