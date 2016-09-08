@@ -1,18 +1,17 @@
 #!/usr/bin/env python
 
-import os
-import sys
-import optparse
-import logging
-import tempfile
 import hashlib
+import optparse
+import sys
+import tempfile
 
 from Foundation import NSURL, NSMutableDictionary
 from Quartz import PDFKit
+
 from omnigraffle import *
 
-def export(source, target, canvasname=None, format='pdf', debug=False, force=False):
 
+def export(source, target, canvasname=None, format='pdf', debug=False, force=False):
     # logging
     if debug:
         logging.basicConfig(level=logging.DEBUG)
@@ -33,15 +32,15 @@ def export(source, target, canvasname=None, format='pdf', debug=False, force=Fal
             canvasname = canvasname[:canvasname.rfind('.')]
 
         if not canvasname or len(canvasname) == 0:
-            print >> sys.stderr, "Without canvas name, the target (-t) "\
-                                       "must be a directory"
+            print >> sys.stderr, "Without canvas name, the target (-t) " \
+                                 "must be a directory"
             sys.exit(1)
 
     # determine the format
     if not export_all:
         # guess from the suffix
         if not format:
-            format = target[target.rfind('.')+1:]
+            format = target[target.rfind('.') + 1:]
 
     if not format or len(format) == 0:
         format = 'pdf'
@@ -57,16 +56,20 @@ def export(source, target, canvasname=None, format='pdf', debug=False, force=Fal
     schema = og.open(source)
 
     if export_all:
-        namemap=lambda c, f: '%s.%s' % (c, f) if f else c
+        namemap = lambda c, f: '%s.%s' % (c, f) if f else c
 
         for c in schema.get_canvas_list():
+            canvas_file = c.replace(":", "")
+            canvas_file = canvas_file.replace("/", "")
+
             targetfile = os.path.join(os.path.abspath(target),
-                                      namemap(c, format))
+                                      namemap(canvas_file, format))
             logging.debug("Exporting `%s' into `%s' as %s" %
                           (c, targetfile, format))
             export_one(schema, targetfile, c, format, force)
     else:
         export_one(schema, target, canvasname, format, force)
+
 
 def export_one(schema, filename, canvasname, format='pdf', force=False):
     def _checksum(filepath):
@@ -84,9 +87,9 @@ def export_one(schema, filename, canvasname, format='pdf', force=False):
 
         url = NSURL.fileURLWithPath_(filepath)
         pdfdoc = PDFKit.PDFDocument.alloc().initWithURL_(url)
-        
+
         assert pdfdoc != None
-        
+
         chsum = None
         attrs = pdfdoc.documentAttributes()
         if PDFKit.PDFDocumentSubjectAttribute in attrs:
@@ -115,12 +118,13 @@ def export_one(schema, filename, canvasname, format='pdf', force=False):
     chksum = None
     if os.path.isfile(filename) and not force:
         existing_chksum = _checksum(filename) if format != 'pdf' \
-                                              else _checksum_pdf(filename)
+            else _checksum_pdf(filename)
 
         new_chksum = _compute_canvas_checksum(canvasname)
 
         if existing_chksum == new_chksum and existing_chksum != None:
-            logging.debug('Not exporting `%s` into `%s` as `%s` - canvas has not been changed' % (canvasname, filename, format))
+            logging.debug(
+                'Not exporting `%s` into `%s` as `%s` - canvas has not been changed' % (canvasname, filename, format))
             return False
         else:
             chksum = new_chksum
@@ -156,12 +160,12 @@ def main():
 
     parser.add_option('-c',
                       help='canvas name. If not given it will be guessed from '
-                      'the target filename unless it is a directory.',
+                           'the target filename unless it is a directory.',
                       metavar='NAME', dest='canvasname')
     parser.add_option('-f',
                       help='format (one of: pdf, png, svg, eps). Guessed '
-                      'from the target filename suffix unless it is a '
-                      'directory. Defaults to pdf',
+                           'from the target filename suffix unless it is a '
+                           'directory. Defaults to pdf',
                       metavar='FMT', dest='format')
     parser.add_option('--force', action='store_true', help='force the export',
                       dest='force')
@@ -176,8 +180,9 @@ def main():
 
     (source, target) = args
 
-    export(source, target, options.canvasname, options.format, 
-        options.debug, options.force)
+    export(source, target, options.canvasname, options.format,
+           options.debug, options.force)
+
 
 if __name__ == '__main__':
     main()
