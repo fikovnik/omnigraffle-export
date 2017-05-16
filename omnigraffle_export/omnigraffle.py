@@ -30,7 +30,16 @@ class OmniGraffleSchema(object):
 
     def sandboxed(self):
         # real check using '/usr/bin/codesign --display --entitlements - /Applications/OmniGraffle.app'
-        return self.og.version()[0] == '6' and os.path.exists(os.path.expanduser(OmniGraffle.SANDBOXED_DIR_6))
+        return self.og.version()[0] >= '6'
+
+    def get_sandbox_path(self):
+        version = self.og.version()[0]
+        path = os.path.expanduser(OmniGraffle.SANDBOXED_DIR % version)
+
+        if not os.path.exists(path):
+            raise RuntimeError('OmniGraffle is sandboxed but missing sandbox path: %s' % path)
+
+        return path
 
     def get_canvas_list(self):
         """
@@ -68,7 +77,7 @@ class OmniGraffleSchema(object):
         export_path = fname
         # Is OmniGraffle sandboxed?
         if self.sandboxed():
-            export_path = os.path.expanduser(OmniGraffle.SANDBOXED_DIR_6) + os.path.basename(fname)
+            export_path = self.get_sandbox_path() + os.path.basename(fname)
             logging.debug('OmniGraffle is sandboxed - exporting to: %s' % export_path)
 
         # FIXME: does this return something or throw something?
@@ -99,7 +108,7 @@ class OmniGraffleSchema(object):
 
 class OmniGraffle(object):
 
-    SANDBOXED_DIR_6 = '~/Library/Containers/com.omnigroup.OmniGraffle6/Data/'
+    SANDBOXED_DIR = '~/Library/Containers/com.omnigroup.OmniGraffle%s/Data/'
 
     def __init__(self):
         names = ['OmniGraffle 5.app', 'OmniGraffle Professional 5.app', 'OmniGraffle']
