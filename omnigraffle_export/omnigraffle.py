@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 
 from appscript import *
 
@@ -21,12 +22,17 @@ class OmniGraffleSchema(object):
 
     # attribute header in PDF document that contains the checksum
     PDF_CHECKSUM_ATTRIBUTE = 'OmnigraffleExportChecksum: '
+    TIMEOUT = 5  # timeout waiting for export to be generated in seconds
+    INTERVAL = 0.05  # interval at which to check for export completion (seconds)
 
     def __init__(self, og, doc):
 
         self.og = og
         self.doc = doc
         self.path = doc.path()
+
+    def has_export_function(self):
+        return tuple(map(int, self.og.version().split('.'))[:2]) >= (7, 8)
 
     def sandboxed(self):
         # real check using '/usr/bin/codesign --display --entitlements - /Applications/OmniGraffle.app'
@@ -56,11 +62,17 @@ class OmniGraffleSchema(object):
         # canvas name
         assert canvasname and len(canvasname) > 0, 'canvasname is missing'
 
-        self.og.current_export_settings.area_type.set(k.all_graphics)
-
         # format
         if format not in OmniGraffleSchema.EXPORT_FORMATS:
             raise RuntimeError('Unknown format: %s' % format)
+
+        export_format = OmniGraffleSchema.EXPORT_FORMATS[format]
+
+        export_path = fname
+        # Is OmniGraffle sandboxed?
+        if self.sandboxed():
+            export_path = self.get_sandbox_path() + os.path.basename(fname)
+            logging.debug('OmniGraffle is sandboxed - exporting to: %s' % export_path)
 
          # find canvas
         canvas = [c for c in self.doc.canvases() if c.name() == canvasname]
@@ -72,19 +84,29 @@ class OmniGraffleSchema(object):
 
         # export
         self.og.windows.first().canvas.set(canvas)
-        export_format = OmniGraffleSchema.EXPORT_FORMATS[format]
 
-        export_path = fname
-        # Is OmniGraffle sandboxed?
-        if self.sandboxed():
-            export_path = self.get_sandbox_path() + os.path.basename(fname)
-            logging.debug('OmniGraffle is sandboxed - exporting to: %s' % export_path)
+        if self.has_export_function():
+            # Omnigraffle 7.8+
+            if (export_format == None):
+                self.doc.export(scope=k.all_graphics, to=export_path)
+            else:
+                self.doc.export(as_=export_format, scope=k.all_graphics, to=export_path)
 
-        # FIXME: does this return something or throw something?
-        if (export_format == None):
-            self.doc.save(in_=export_path)
+            # Wait for the exported file to finish generating - doc.export is asynchronous
+            waited = 0
+            while not os.path.exists(export_path) and waited < self.TIMEOUT:
+                time.sleep(self.INTERVAL)
+                waited += self.INTERVAL
+
         else:
-            self.doc.save(as_=export_format, in_=export_path)
+            # Omnigraffle < 7.8
+            self.og.current_export_settings.area_type.set(k.all_graphics)
+
+            # FIXME: does this return something or throw something?
+            if (export_format == None):
+                self.doc.save(in_=export_path)
+            else:
+                self.doc.save(as_=export_format, in_=export_path)
 
         if self.sandboxed():
             os.rename(export_path, fname)
@@ -154,7 +176,7 @@ class OmniGraffle(object):
         # apparently the process is sandboxed and cannot access the file
         # 16/03/2015 13:01:54.000 kernel[0]: Sandbox: OmniGraffle(66840) deny file-read-data test.graffle
         # therefore we first try to open it manually
-        
+
         import subprocess
         subprocess.call(['open',fname])
 
